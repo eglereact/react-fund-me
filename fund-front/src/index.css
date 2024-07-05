@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .center-all {
+    @apply flex justify-center items-center;
+  }
+
+  .bg-dark {
+    @apply bg-[#0A5E2AFF];
+  }
+
+  .bg-light {
+    @apply bg-[#6DAC4FFF];
+  }
+
+  .text-dark {
+    @apply text-[#0A5E2AFF];
+  }
+
+  .text-light {
+    @apply text-[#6DAC4FFF];
+  }
+
+  .hover-bg-light {
+    @apply bg-[#5d9245];
+  }
+
+  .hover-text-light {
+    @apply text-[#5d9245];
+  }
+
+  .hover-text-dark {
+    @apply text-[#cd2222d8];
+  }
+
+  .bg-light-grey {
+    @apply bg-[#EFEFE8FF];
+  }
+
+  .button-light {
+    @apply text-white bg-light px-7 py-3 font-bold rounded hover:hover-bg-light transition-all;
+  }
+}

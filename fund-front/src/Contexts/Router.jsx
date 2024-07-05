@@ -1,5 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import Page404 from "../Components/Page404";
+import Home from "../Components/Web/Home";
+import Register from "../Components/Common/Register";
 
 const RouterContext = createContext([]);
 
@@ -7,16 +9,6 @@ const Router = () => {
   const [route, setRoute] = useState("");
   const [params, setParams] = useState([]);
 
-  const Home = () => {
-    return (
-      <div>
-        <h1>home</h1>
-        <a href="/#car/1">Fund Car</a>
-        <a href="/#house/1">Fund House</a>
-        <a href="/#">Home</a>
-      </div>
-    );
-  };
   const Car = () => {
     return (
       <div>
@@ -61,6 +53,7 @@ const Router = () => {
     { path: "#", pc: 0, component: <Home /> },
     { path: "#car", pc: 1, component: <Car /> },
     { path: "#house", pc: 1, component: <House /> },
+    { path: "#register", pc: 0, component: <Register /> },
   ];
 
   const routeComponent = routes.find(
