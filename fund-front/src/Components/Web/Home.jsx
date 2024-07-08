@@ -1,5 +1,6 @@
 import Banner from "./Parts/Banner";
 import Header from "./Parts/Header";
+import Posts from "./Parts/Posts";
 import Stats from "./Parts/Stats";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
       <Header />
       <Banner />
       <Stats />
+      <Posts />
     </div>
   );
 };

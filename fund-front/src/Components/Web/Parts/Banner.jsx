@@ -3,7 +3,7 @@ const Banner = () => {
     <section className="bg-light-grey">
       <div className="max-w-[1200px] m-auto center-all">
         <div className="w-1/2">
-          <img src="./images/banner.svg" />
+          <img src="./images/banner.svg" alt="Better World" />
         </div>
         <div className="w-1/2 space-y-6 ">
           <p className="text-light uppercase text-xs">
@@ -18,7 +18,7 @@ const Banner = () => {
             memorial tributes and funerals to medical emergencies and
             nonprofits. Whenever you need assistance, you can ask here.
           </p>
-          <a href="/#register" className="button-light inline-block">
+          <a href="/#login" className="button-light inline-block">
             Start your fund me
           </a>
         </div>

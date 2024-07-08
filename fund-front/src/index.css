@@ -40,6 +40,10 @@
   }
 
   .button-light {
-    @apply text-white bg-light px-7 py-3 font-bold rounded hover:hover-bg-light transition-all;
+    @apply text-white bg-light px-7 py-3 font-bold rounded hover:hover-bg-light transition-all border-2 border-transparent;
+  }
+
+  .button-empty {
+    @apply text-light bg-transparent px-7 py-3 font-bold rounded hover:bg-light transition-all hover:text-white border-2 border-[#6DAC4FFF];
   }
 }

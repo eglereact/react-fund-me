@@ -28,8 +28,8 @@ const Header = () => {
             ))}
           </ul>
           <div>
-            <a href="/#register" className="button-light">
-              Donate
+            <a href="/#login" className="button-light">
+              Login to Donate
             </a>
           </div>
         </div>

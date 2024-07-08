@@ -2,6 +2,7 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import Page404 from "../Components/Page404";
 import Home from "../Components/Web/Home";
 import Register from "../Components/Common/Register";
+import Login from "../Components/Common/Login";
 
 const RouterContext = createContext([]);
 
@@ -54,6 +55,7 @@ const Router = () => {
     { path: "#car", pc: 1, component: <Car /> },
     { path: "#house", pc: 1, component: <House /> },
     { path: "#register", pc: 0, component: <Register /> },
+    { path: "#login", pc: 0, component: <Login /> },
   ];
 
   const routeComponent = routes.find(
