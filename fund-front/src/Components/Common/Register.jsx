@@ -1,4 +1,39 @@
+import { useEffect, useState } from "react";
+import useServerPost from "../../Hooks/useServerPost";
+import { REDIRECT_AFTER_REGISTER } from "../../Constants/urls";
+
 const Register = () => {
+  const defaultValues = {
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+  };
+
+  const [form, setForm] = useState(defaultValues);
+
+  const { doAction, response } = useServerPost("register");
+
+  useEffect(() => {
+    if (null === response) {
+      return;
+    }
+    window.location.hash = REDIRECT_AFTER_REGISTER;
+  }, [response]);
+
+  const handleForm = (e) => {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = () => {
+    //validations...
+    doAction({
+      name: form.name,
+      email: form.email,
+      password: form.password,
+    });
+  };
+
   return (
     <div className="bg-light-grey h-[100vh] center-all">
       <div className="max-w-[1200px] m-auto w-1/3">
@@ -12,6 +47,8 @@ const Register = () => {
               <input
                 type="text"
                 name="name"
+                onChange={handleForm}
+                value={form.name}
                 placeholder="Jon Doe"
                 autoComplete="username"
                 className="bg-light-grey rounded outline-none p-2"
@@ -24,6 +61,8 @@ const Register = () => {
               <input
                 type="email"
                 name="email"
+                onChange={handleForm}
+                value={form.email}
                 placeholder="jondoe@example.com"
                 autoComplete="email"
                 className="bg-light-grey rounded outline-none p-2"
@@ -35,7 +74,9 @@ const Register = () => {
               </label>
               <input
                 type="password"
-                name="psw"
+                name="password"
+                onChange={handleForm}
+                value={form.password}
                 placeholder="**********"
                 autoComplete="new-password"
                 className="bg-light-grey rounded outline-none p-2"
@@ -47,14 +88,20 @@ const Register = () => {
               </label>
               <input
                 type="password"
-                name="psw2"
+                name="password2"
+                onChange={handleForm}
+                value={form.password2}
                 placeholder="**********"
                 autoComplete="new-password"
                 className="bg-light-grey rounded outline-none p-2"
               />
             </div>
             <div>
-              <button className="button-light" type="button">
+              <button
+                onClick={handleSubmit}
+                className="button-light"
+                type="button"
+              >
                 Sign Up
               </button>
             </div>
