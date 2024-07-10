@@ -11,6 +11,7 @@ const Register = () => {
   };
 
   const [form, setForm] = useState(defaultValues);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { doAction, response } = useServerPost("register");
 
@@ -18,7 +19,10 @@ const Register = () => {
     if (null === response) {
       return;
     }
-    window.location.hash = REDIRECT_AFTER_REGISTER;
+    setButtonDisabled(false);
+    if (response.type === "success") {
+      window.location.hash = REDIRECT_AFTER_REGISTER;
+    }
   }, [response]);
 
   const handleForm = (e) => {
@@ -27,6 +31,7 @@ const Register = () => {
 
   const handleSubmit = () => {
     //validations...
+    setButtonDisabled(true);
     doAction({
       name: form.name,
       email: form.email,
@@ -99,8 +104,9 @@ const Register = () => {
             <div>
               <button
                 onClick={handleSubmit}
-                className="button-light"
+                className="button-light disabled:bg-gray-400"
                 type="button"
+                disabled={buttonDisabled}
               >
                 Sign Up
               </button>

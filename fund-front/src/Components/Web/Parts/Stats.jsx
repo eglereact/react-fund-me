@@ -1,6 +1,6 @@
 const Stats = () => {
   return (
-    <section className="p-20">
+    <section className="p-40">
       <div className="max-w-[1200px] m-auto center-all">
         <div className="w-1/2 space-y-6 ">
           <p className="text-light uppercase text-xs">Why you choose us</p>
@@ -11,7 +11,12 @@ const Stats = () => {
             Supporting people in donating to those in need and making a
             meaningful impact.
           </p>
-          <div className="flex space-x-10">
+          <div
+            className="flex space-x-10"
+            data-aos="fade-up"
+            data-aos-delay="400"
+            data-aos-duration="600"
+          >
             <div>
               <h2 className="text-5xl text-dark font-bold">270+</h2>
               <h3 className="text-gray-900">People we helped</h3>
@@ -27,7 +32,7 @@ const Stats = () => {
           </div>
         </div>
         <div className="w-1/2">
-          <img src="./images/plant2.png" />
+          <img src="./images/plant2.png" alt="plant" />
         </div>
       </div>
     </section>

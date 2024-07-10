@@ -9,7 +9,7 @@ const Post = ({ post }) => {
         className="p-6 bg-white shadow-md rounded-md mb-4 border-4
        border-[#6DAC4FFF] relative"
       >
-        <div className="bg-light absolute top-0 px-5 py-2 left-0 text-white font-bold rounded-br-lg ">
+        <div className="bg-light absolute -top-2 px-5 py-2 -left-2 text-white font-bold rounded-br-lg ">
           <p className="center-all gap-2 text-lg">
             Thank You <BiHappyBeaming size={30} />
           </p>
@@ -30,7 +30,7 @@ const Post = ({ post }) => {
               <div className="bg-light rounded text-white  p-1 text-xs ">
                 {progress}%
               </div>
-              <div class="w-0 h-0 border-l-[5px] border-l-transparent border-t-[7px] border-t-[#6DAC4FFF] border-r-[5px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-l-[5px] border-l-transparent border-t-[7px] border-t-[#6DAC4FFF] border-r-[5px] border-r-transparent"></div>
             </div>
             <div
               className="bg-light h-2 rounded-full"
@@ -47,6 +47,9 @@ const Post = ({ post }) => {
   } else {
     return (
       <div
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="1000"
         className="p-6 bg-white shadow-md rounded-md mb-4 border-2 w-full
        border-white flex gap-10"
       >

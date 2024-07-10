@@ -1,9 +1,12 @@
 import axios from "axios";
 import { SERVER_URL } from "../Constants/urls";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MessagesContext } from "../Contexts/Messages";
 
 const useServerPost = (url) => {
   const [response, setResponse] = useState(null);
+
+  const { messageError } = useContext(MessagesContext);
 
   const doAction = (data) => {
     axios
@@ -16,6 +19,7 @@ const useServerPost = (url) => {
       })
       .catch((error) => {
         console.log(error);
+        messageError(error);
         setResponse({
           type: "error",
           data: error,
