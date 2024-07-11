@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import useServerPost from "../../Hooks/useServerPost";
 import { REDIRECT_AFTER_REGISTER } from "../../Constants/urls";
+import Input from "../Forms/Input";
+import useRegister from "../../Validations/useRegister";
 
 const Register = () => {
   const defaultValues = {
@@ -14,7 +16,7 @@ const Register = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { doAction, response } = useServerPost("register");
-
+  const { errors, validate, setServerErrors } = useRegister();
   useEffect(() => {
     if (null === response) {
       return;
@@ -22,6 +24,10 @@ const Register = () => {
     setButtonDisabled(false);
     if (response.type === "success") {
       window.location.hash = REDIRECT_AFTER_REGISTER;
+    } else {
+      if (response.data?.response?.data?.errors) {
+        setServerErrors(response.data.response.data.errors);
+      }
     }
   }, [response]);
 
@@ -30,7 +36,10 @@ const Register = () => {
   };
 
   const handleSubmit = () => {
-    //validations...
+    //validations
+    if (!validate(form)) {
+      return;
+    }
     setButtonDisabled(true);
     doAction({
       name: form.name,
@@ -45,62 +54,50 @@ const Register = () => {
         <section className="bg-white p-10 rounded shadow-sm">
           <h1 className="text-5xl text-dark font-bold mb-10">Sign Up</h1>
           <form className="space-y-4">
-            <div className="flex flex-col">
-              <label className="text-dark uppercase text-xs font-bold mb-1">
-                Your name
-              </label>
-              <input
-                type="text"
-                name="name"
-                onChange={handleForm}
-                value={form.name}
-                placeholder="Jon Doe"
-                autoComplete="username"
-                className="bg-light-grey rounded outline-none p-2"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="text-dark uppercase text-xs font-bold mb-1">
-                Email Address
-              </label>
-              <input
-                type="email"
-                name="email"
-                onChange={handleForm}
-                value={form.email}
-                placeholder="jondoe@example.com"
-                autoComplete="email"
-                className="bg-light-grey rounded outline-none p-2"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="text-dark uppercase text-xs font-bold mb-1">
-                Your Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                onChange={handleForm}
-                value={form.password}
-                placeholder="**********"
-                autoComplete="new-password"
-                className="bg-light-grey rounded outline-none p-2"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="text-dark uppercase text-xs font-bold mb-1">
-                Repeat Password
-              </label>
-              <input
-                type="password"
-                name="password2"
-                onChange={handleForm}
-                value={form.password2}
-                placeholder="**********"
-                autoComplete="new-password"
-                className="bg-light-grey rounded outline-none p-2"
-              />
-            </div>
+            <Input
+              label=" Your name"
+              type="text"
+              name="name"
+              onChange={handleForm}
+              value={form.name}
+              placeholder="Jon Doe"
+              autoComplete="username"
+              errors={errors}
+            />
+
+            <Input
+              label="Email Address"
+              type="email"
+              name="email"
+              onChange={handleForm}
+              value={form.email}
+              placeholder="jondoe@example.com"
+              autoComplete="email"
+              errors={errors}
+            />
+
+            <Input
+              label="Your Password"
+              type="password"
+              name="password"
+              onChange={handleForm}
+              value={form.password}
+              placeholder="**********"
+              autoComplete="new-password"
+              errors={errors}
+            />
+
+            <Input
+              label=" Repeat Password"
+              type="password"
+              name="password2"
+              onChange={handleForm}
+              value={form.password2}
+              placeholder="**********"
+              autoComplete="new-password"
+              errors={errors}
+            />
+
             <div>
               <button
                 onClick={handleSubmit}
