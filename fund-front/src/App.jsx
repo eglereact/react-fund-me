@@ -11,7 +11,7 @@ function App() {
   return (
     <Messages>
       <Msg />
-      <Router />;
+      <Router />
     </Messages>
   );
 }

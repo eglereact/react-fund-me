@@ -1,4 +1,5 @@
 import { navLinks } from "../../../Data/links";
+import Logo from "../../Common/Logo";
 
 const Header = () => {
   return (
@@ -10,13 +11,7 @@ const Header = () => {
       </div>
       <nav className="bg-dark">
         <div className="max-w-[1200px] m-auto flex items-center justify-between h-24">
-          <div className="text-white text-2xl">
-            <p>
-              react
-              <span className="font-bold text-3xl text-light">FUND</span>
-              me
-            </p>
-          </div>
+          <Logo />
           <ul className="center-all space-x-10 text-white text-lg">
             {navLinks.map((link) => (
               <li
@@ -27,9 +22,12 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <div>
+          <div className="flex gap-2">
             <a href="/#login" className="button-light">
-              Login to Donate
+              Login
+            </a>
+            <a href="/#register" className="button-light">
+              Sign Up
             </a>
           </div>
         </div>

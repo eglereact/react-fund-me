@@ -14,19 +14,19 @@ const Stats = () => {
           <div
             className="flex space-x-10"
             data-aos="fade-up"
-            data-aos-delay="400"
+            data-aos-delay="100"
             data-aos-duration="600"
           >
             <div>
-              <h2 className="text-5xl text-dark font-bold">270+</h2>
+              <h1 className="text-5xl text-dark font-bold">270+</h1>
               <h3 className="text-gray-900">People we helped</h3>
             </div>
             <div>
-              <h2 className="text-5xl text-dark font-bold">500k+</h2>
+              <h1 className="text-5xl text-dark font-bold">500k+</h1>
               <h3 className="text-gray-900">Dollars we collected</h3>
             </div>
             <div>
-              <h2 className="text-5xl text-dark font-bold">20+</h2>
+              <h1 className="text-5xl text-dark font-bold">20+</h1>
               <h3 className="text-gray-900">Closed projects</h3>
             </div>
           </div>

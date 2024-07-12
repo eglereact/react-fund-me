@@ -6,19 +6,19 @@ import { MessagesContext } from "../Contexts/Messages";
 const useServerPost = (url) => {
   const [response, setResponse] = useState(null);
 
-  const { messageError } = useContext(MessagesContext);
+  const { messageError, messageSuccess } = useContext(MessagesContext);
 
   const doAction = (data) => {
     axios
       .post(`${SERVER_URL}${url}`, data)
       .then((res) => {
+        messageSuccess(res);
         setResponse({
           type: "success",
           data: res.data,
         });
       })
       .catch((error) => {
-        console.log(error);
         messageError(error);
         setResponse({
           type: "error",
@@ -27,7 +27,7 @@ const useServerPost = (url) => {
       });
   };
 
-  return { doAction, response };
+  return { doAction, response, messageSuccess };
 };
 
 export default useServerPost;

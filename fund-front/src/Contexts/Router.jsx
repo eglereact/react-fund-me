@@ -3,33 +3,13 @@ import Page404 from "../Components/Page404";
 import Home from "../Components/Web/Home";
 import Register from "../Components/Common/Register";
 import Login from "../Components/Common/Login";
+import Dashboard from "../Components/Admin/Dashboard";
 
 const RouterContext = createContext([]);
 
 const Router = () => {
   const [route, setRoute] = useState("");
   const [params, setParams] = useState([]);
-
-  const Car = () => {
-    return (
-      <div>
-        <h1>car</h1>
-        <a href="/#car/1">Fund Car</a>
-        <a href="/#house/1">Fund House</a>
-        <a href="/#">Home</a>
-      </div>
-    );
-  };
-  const House = () => {
-    return (
-      <div>
-        <h1>house</h1>
-        <a href="/#car/1">Fund Car</a>
-        <a href="/#house/1">Fund House</a>
-        <a href="/#">Home</a>
-      </div>
-    );
-  };
 
   const handleHashChange = useCallback(() => {
     const hash = window.location.hash.split("/");
@@ -52,8 +32,7 @@ const Router = () => {
   const routes = [
     { path: "", pc: 0, component: null },
     { path: "#", pc: 0, component: <Home /> },
-    { path: "#car", pc: 1, component: <Car /> },
-    { path: "#house", pc: 1, component: <House /> },
+    { path: "#dashboard", pc: 0, component: <Dashboard /> },
     { path: "#register", pc: 0, component: <Register /> },
     { path: "#login", pc: 0, component: <Login /> },
   ];
