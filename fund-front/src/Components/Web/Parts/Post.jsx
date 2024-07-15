@@ -14,8 +14,8 @@ const Post = ({ post }) => {
        border-[#6DAC4FFF] flex gap-10"
       >
         <img
-          src="./images/ty4.png"
-          className="absolute w-36 left-10 bottom-8  z-10 fill-slate-900  -rotate-12"
+          src="./images/ty5.png"
+          className="absolute w-40 left-10 bottom-6  z-10 fill-slate-900  -rotate-6"
         />
         <div className="w-2/3 flex flex-col gap-3">
           <h2 className="text-2xl font-bold mt-4 text-dark">{post.title}</h2>

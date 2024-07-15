@@ -17,6 +17,8 @@ export const donationPosts = [
     image: "./images/plant3.png",
     moneyGoal: 50000,
     amountRaised: 15000,
+    featured: false,
+    approved: true,
   },
   {
     id: 2,
@@ -27,6 +29,8 @@ export const donationPosts = [
     image: "./images/plant.png",
     moneyGoal: 20000,
     amountRaised: 13000,
+    featured: false,
+    approved: true,
   },
   {
     id: 3,
@@ -37,6 +41,8 @@ export const donationPosts = [
     image: "./images/plant4.jpg",
     moneyGoal: 10000,
     amountRaised: 8000,
+    featured: true,
+    approved: true,
   },
   {
     id: 4,
@@ -47,6 +53,8 @@ export const donationPosts = [
     image: "./images/plant.png",
     moneyGoal: 15000,
     amountRaised: 15000,
+    featured: true,
+    approved: true,
   },
   {
     id: 5,
@@ -57,5 +65,20 @@ export const donationPosts = [
     image: "./images/plant.png",
     moneyGoal: 30000,
     amountRaised: 21000,
+    featured: true,
+    approved: false,
   },
+];
+
+export const users = [
+  { id: 1, name: "Alice Johnson", email: "alice@example.com", role: "Admin" },
+  { id: 2, name: "Bob Smith", email: "bob@example.com", role: "Editor" },
+  {
+    id: 3,
+    name: "Charlie Brown",
+    email: "charlie@example.com",
+    role: "User",
+  },
+  { id: 4, name: "Diana Prince", email: "diana@example.com", role: "User" },
+  { id: 5, name: "Evan Davis", email: "evan@example.com", role: "Editor" },
 ];

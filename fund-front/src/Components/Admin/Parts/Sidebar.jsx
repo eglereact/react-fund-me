@@ -1,54 +1,54 @@
-import React, { useState } from "react";
+import { MdMenuOpen, MdMenu, MdDashboard } from "react-icons/md";
 import { FaUsers, FaFile } from "react-icons/fa";
-import { MdDashboard, MdMenu, MdMenuOpen } from "react-icons/md";
 import Logo from "../../Common/Logo";
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
+const Sidebar = ({ children }) => {
   return (
-    <div className="flex">
-      <div
-        className={`bg-light-grey text-dark h-screen p-5 ${
-          isOpen ? "w-64" : "w-20"
-        } transition-width duration-300 `}
-      >
-        <div className="flex justify-between items-center mb-5 h-20">
-          <div>{isOpen ? <Logo /> : <h1>rFm</h1>}</div>
+    <div className="flex flex-col h-screen">
+      <div className="bg-darkblue h-16 w-full flex items-center pl-10 justify-between">
+        <Logo />
+        <div className="center-all gap-4">
+          <h2 className="text-white">Hello, admin</h2>
+          <a href="/#logout" className="button-light py-2 mr-10">
+            Logout
+          </a>
         </div>
-        <ul className="mt-10">
-          <li className="mb-4 flex items-center h-10">
-            <MdDashboard className="text-xl" />
-            <a
-              href="/#dashboard"
-              className={`ml-4 text-lg ${!isOpen && "hidden"}`}
-            >
-              Dashboard
-            </a>
-          </li>
-          <li className="mb-4 flex items-center h-10">
-            <FaUsers className="text-xl" />
-            <span className={`ml-4 text-lg ${!isOpen && "hidden"}`}>Users</span>
-          </li>
-          <li className="mb-4 flex items-center h-10">
-            <FaFile className="text-xl" />
-            <span className={`ml-4 text-lg ${!isOpen && "hidden"}`}>Posts</span>
-          </li>
-        </ul>
       </div>
-      <div className="flex-1 p-10">
-        <button
-          onClick={toggleSidebar}
-          className=" focus:outline-none text-4xl  text-red-500"
+      <div className="flex h-full">
+        <div
+          className={`bg-lightgray w-20 md:w-64 text-gray-400 h-full overflow-hidden p-5 transition-width duration-300 `}
         >
-          {isOpen ? <MdMenu /> : <MdMenuOpen />}
-        </button>
-        {/* Main content goes here */}
-        <h1 className="text-3xl">Main Content</h1>
+          <ul className="mt-10">
+            <li className="mb-4 h-10">
+              <a
+                href="/#dashboard"
+                className={`text-xs flex flex-col items-center md:text-lg md:flex-row md:gap-2`}
+              >
+                <MdDashboard className="text-lg md:text-xl " />
+                <span className="flex">Dashboard</span>
+              </a>
+            </li>
+            <li className="mb-4 h-10">
+              <a
+                href="/#users"
+                className={`text-xs flex flex-col items-center md:text-lg md:flex-row md:gap-2`}
+              >
+                <FaUsers className="text-lg md:text-xl " />
+                <span className="flex">Users</span>
+              </a>
+            </li>
+            <li className="mb-4 h-10">
+              <a
+                href="/#posts"
+                className={`text-xs flex flex-col items-center md:text-lg md:flex-row md:gap-2`}
+              >
+                <FaFile className="text-lg md:text-xl " />
+                <span className="flex">Posts</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="flex-1 h-full p-10 bg-gray-100">{children}</div>
       </div>
     </div>
   );

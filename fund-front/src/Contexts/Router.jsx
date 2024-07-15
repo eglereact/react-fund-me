@@ -4,6 +4,9 @@ import Home from "../Components/Web/Home";
 import Register from "../Components/Common/Register";
 import Login from "../Components/Common/Login";
 import Dashboard from "../Components/Admin/Dashboard";
+import UsersList from "../Components/Admin/UsersList";
+import Sidebar from "../Components/Admin/Parts/Sidebar";
+import PostsList from "../Components/Admin/PostsList";
 
 const RouterContext = createContext([]);
 
@@ -32,9 +35,35 @@ const Router = () => {
   const routes = [
     { path: "", pc: 0, component: null },
     { path: "#", pc: 0, component: <Home /> },
-    { path: "#dashboard", pc: 0, component: <Dashboard /> },
+    {
+      path: "#dashboard",
+      pc: 0,
+      component: (
+        <Sidebar>
+          <Dashboard />
+        </Sidebar>
+      ),
+    },
     { path: "#register", pc: 0, component: <Register /> },
     { path: "#login", pc: 0, component: <Login /> },
+    {
+      path: "#users",
+      pc: 0,
+      component: (
+        <Sidebar>
+          <UsersList />
+        </Sidebar>
+      ),
+    },
+    {
+      path: "#posts",
+      pc: 0,
+      component: (
+        <Sidebar>
+          <PostsList />
+        </Sidebar>
+      ),
+    },
   ];
 
   const routeComponent = routes.find(

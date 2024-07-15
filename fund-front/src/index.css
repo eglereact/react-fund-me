@@ -27,6 +27,14 @@ h1 {
     @apply bg-[#6DAC4FFF];
   }
 
+  .bg-darkblue {
+    @apply bg-[#101828];
+  }
+
+  .bg-lightgray {
+    @apply bg-[#FCFCFD];
+  }
+
   .text-dark {
     @apply text-[#0A5E2AFF];
   }
@@ -43,7 +51,7 @@ h1 {
     @apply text-[#5d9245];
   }
 
-  .hover-text-dark {
+  .text-danger {
     @apply text-[#cd2222d8];
   }
 
