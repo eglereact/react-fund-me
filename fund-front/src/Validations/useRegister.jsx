@@ -30,7 +30,7 @@ const useRegister = () => {
     if (form.password !== form.password2 && !errorsBag.password) {
       errorsBag.password2 = "Passwords must match.";
     }
-    return true;
+
     if (Object.keys(errorsBag).length === 0) {
       setErrors({});
       return true;

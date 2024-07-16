@@ -4,14 +4,19 @@ import { Messages } from "./Contexts/Messages";
 import { Router } from "./Contexts/Router";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Modals } from "./Contexts/Modals";
+import DeleteModal from "./Components/Common/DeleteModal";
 
 function App() {
   AOS.init();
 
   return (
     <Messages>
-      <Msg />
-      <Router />
+      <Modals>
+        <Msg />
+        <DeleteModal />
+        <Router />
+      </Modals>
     </Messages>
   );
 }

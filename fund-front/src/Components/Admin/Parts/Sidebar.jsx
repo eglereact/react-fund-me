@@ -1,6 +1,7 @@
-import { MdMenuOpen, MdMenu, MdDashboard } from "react-icons/md";
+import { MdDashboard } from "react-icons/md";
 import { FaUsers, FaFile } from "react-icons/fa";
 import Logo from "../../Common/Logo";
+import * as l from "../../../Constants/urls";
 
 const Sidebar = ({ children }) => {
   return (
@@ -9,7 +10,7 @@ const Sidebar = ({ children }) => {
         <Logo />
         <div className="center-all gap-4">
           <h2 className="text-white">Hello, admin</h2>
-          <a href="/#logout" className="button-light py-2 mr-10">
+          <a href="/#" className="button-light py-2 mr-10">
             Logout
           </a>
         </div>
@@ -21,7 +22,7 @@ const Sidebar = ({ children }) => {
           <ul className="mt-10">
             <li className="mb-4 h-10">
               <a
-                href="/#dashboard"
+                href={l.SITE_DASHBOARD}
                 className={`text-xs flex flex-col items-center md:text-lg md:flex-row md:gap-2`}
               >
                 <MdDashboard className="text-lg md:text-xl " />
@@ -30,7 +31,7 @@ const Sidebar = ({ children }) => {
             </li>
             <li className="mb-4 h-10">
               <a
-                href="/#users"
+                href={l.USERS_LIST}
                 className={`text-xs flex flex-col items-center md:text-lg md:flex-row md:gap-2`}
               >
                 <FaUsers className="text-lg md:text-xl " />

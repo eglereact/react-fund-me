@@ -1,5 +1,6 @@
 import { navLinks } from "../../../Data/links";
 import Logo from "../../Common/Logo";
+import * as l from "../../../Constants/urls";
 
 const Header = () => {
   return (
@@ -23,11 +24,14 @@ const Header = () => {
             ))}
           </ul>
           <div className="flex gap-2">
-            <a href="/#login" className="button-light">
+            <a href={l.SITE_LOGIN} className="button-light">
               Login
             </a>
-            <a href="/#register" className="button-light">
+            <a href={l.SITE_REGISTER} className="button-light">
               Sign Up
+            </a>
+            <a href={l.SITE_DASHBOARD} className="button-light">
+              Admin
             </a>
           </div>
         </div>

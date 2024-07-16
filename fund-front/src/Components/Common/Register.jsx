@@ -49,10 +49,20 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-light-grey h-[100vh] center-all">
-      <div className="max-w-[1200px] m-auto w-1/3">
-        <section className="bg-white p-10 rounded shadow-sm">
-          <h1 className="text-5xl text-dark font-bold mb-10">Sign Up</h1>
+    <div className="bg-white min-h-screen flex items-center justify-center">
+      <div className="max-w-[1600px] m-auto flex flex-col md:flex-row h-[100vh]">
+        <section className="hidden md:w-1/2  md:flex items-center justify-center p-10">
+          <img src="./images/zalia.png" alt="Plant" className="rounded-lg" />
+        </section>
+        <section className="bg-white w-full lg:w-1/2 p-10 xl:px-44 rounded  flex-1 flex flex-col justify-center">
+          <div className="text-center">
+            <h1 className="text-5xl text-light font-bold mb-4">
+              Join Us Today
+            </h1>
+            <h3 className="text-xl text-gray-900  mb-10">
+              Enter your email, name and password to register.
+            </h3>
+          </div>
           <form className="space-y-4">
             <Input
               label=" Your name"
@@ -101,24 +111,21 @@ const Register = () => {
             <div>
               <button
                 onClick={handleSubmit}
-                className="button-light disabled:bg-gray-400"
+                className="button-dark disabled:bg-gray-400 active:scale-75 transition-transform"
                 type="button"
                 disabled={buttonDisabled}
               >
-                Sign Up
+                register now
               </button>
             </div>
-            <div className="flex space-x-2 text-gray-900 ">
-              <a href="/#" className="text-light hover:underline">
-                Back to home page
-              </a>
+            <div className="flex space-x-2 text-gray-900 justify-center w-full">
               <p>
-                <span>Have an account? </span>
+                <span className="text-gray-400">Already have an account? </span>
                 <a
                   href="/#login"
                   className="hover:underline hover:hover-text-light"
                 >
-                  Sign In
+                  Sign in
                 </a>
               </p>
             </div>

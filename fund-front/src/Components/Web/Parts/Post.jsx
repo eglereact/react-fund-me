@@ -1,4 +1,5 @@
 import { BiHappyBeaming } from "react-icons/bi";
+import { FaCheck } from "react-icons/fa";
 
 const Post = ({ post }) => {
   const progress = Math.min((post.amountRaised / post.moneyGoal) * 100, 100);
@@ -14,12 +15,12 @@ const Post = ({ post }) => {
        border-[#6DAC4FFF] flex gap-10"
       >
         <img
-          src="./images/ty5.png"
-          className="absolute w-40 left-10 bottom-6  z-10 fill-slate-900  -rotate-6"
+          src="./images/ty2.png"
+          className="absolute w-32 left-64 bottom-2  z-10 fill-slate-900  -rotate-6"
         />
         <div className="w-2/3 flex flex-col gap-3">
           <h2 className="text-2xl font-bold mt-4 text-dark">{post.title}</h2>
-          <p className="text-gray-900 mt-2 pb-4">{post.shortText}</p>
+          <p className="text-gray-900 mt-2 pb-4 h-16">{post.shortText}</p>
           <div className="mt-4">
             <div className="bg-gray-200 rounded-full h-2 relative">
               <div
@@ -36,7 +37,10 @@ const Post = ({ post }) => {
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
-            <p className="text-gray-900 mt-2 text-lg">
+            <p className="text-gray-900 mt-2 text-lg flex gap-1 items-center">
+              <span className="text-light">
+                <FaCheck />
+              </span>
               Goal:{" "}
               <span className="text-dark font-bold">${post.moneyGoal} </span>
             </p>

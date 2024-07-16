@@ -63,6 +63,10 @@ h1 {
     @apply text-white bg-light px-7 py-3 font-bold rounded hover:hover-bg-light transition-all border-2 border-transparent;
   }
 
+  .button-dark {
+    @apply bg-light px-4 py-2 text-white rounded-md uppercase font-bold w-full text-sm my-4 hover:shadow-md;
+  }
+
   .button-empty {
     @apply text-light bg-transparent px-7 py-3 font-bold rounded hover:bg-light transition-all hover:text-white border-2 border-[#6DAC4FFF];
   }

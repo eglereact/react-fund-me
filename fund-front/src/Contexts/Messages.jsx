@@ -41,6 +41,10 @@ export const Messages = ({ children }) => {
   );
 
   const messageSuccess = useCallback((res) => {
+    if (!res.data.message) {
+      return;
+    }
+
     addMessage({
       type: res.data.message.type,
       title: res.data.message.title,
