@@ -17,7 +17,7 @@ const useRegister = () => {
       errorsBag.email = "Email is not valid.";
     }
 
-    if (form.password.length <= 8) {
+    if (form.password.length < 8) {
       errorsBag.password = "Password is too short. Min length is 8 symbols.";
     } else if (!/[0-9]/.test(form.password)) {
       errorsBag.password = "Password must contain a number";

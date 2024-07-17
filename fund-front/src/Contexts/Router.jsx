@@ -8,6 +8,7 @@ import UsersList from "../Components/Admin/UsersList";
 import Sidebar from "../Components/Admin/Parts/Sidebar";
 import PostsList from "../Components/Admin/PostsList";
 import * as l from "../Constants/urls";
+import UserEdit from "../Components/Admin/UserEdit";
 
 const RouterContext = createContext([]);
 
@@ -60,6 +61,16 @@ const Router = () => {
       ),
     },
     {
+      path: l.USER_EDIT,
+      pc: 2,
+      p1: "user-edit",
+      component: (
+        <Sidebar>
+          <UserEdit />
+        </Sidebar>
+      ),
+    },
+    {
       path: "#posts",
       pc: 0,
       component: (
@@ -87,7 +98,7 @@ const Router = () => {
 
   const routeComponent = findRoute()?.component ?? <Page404 />;
   return (
-    <RouterContext.Provider value={params}>
+    <RouterContext.Provider value={{ params }}>
       {routeComponent}
     </RouterContext.Provider>
   );
