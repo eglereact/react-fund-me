@@ -1,3 +1,5 @@
+import * as l from "../../../Constants/urls";
+
 const Banner = () => {
   return (
     <section className="bg-light-grey p-20">
@@ -25,7 +27,7 @@ const Banner = () => {
             nonprofits. Whenever you need assistance, you can ask here.
           </p>
           <a
-            href="/#login"
+            href={l.CREATE_POST}
             className="button-light inline-block"
             data-aos="fade-up"
             data-aos-delay="500"

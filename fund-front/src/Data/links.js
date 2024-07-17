@@ -19,6 +19,7 @@ export const donationPosts = [
     amountRaised: 15000,
     featured: false,
     approved: true,
+    author: "susy sims",
   },
   {
     id: 2,
@@ -31,6 +32,7 @@ export const donationPosts = [
     amountRaised: 13000,
     featured: false,
     approved: true,
+    author: "gary oldman",
   },
   {
     id: 3,
@@ -43,6 +45,7 @@ export const donationPosts = [
     amountRaised: 8000,
     featured: true,
     approved: true,
+    author: "mark tomson",
   },
   {
     id: 4,
@@ -55,6 +58,7 @@ export const donationPosts = [
     amountRaised: 15000,
     featured: true,
     approved: true,
+    author: "felix grill",
   },
   {
     id: 5,
@@ -67,6 +71,7 @@ export const donationPosts = [
     amountRaised: 21000,
     featured: true,
     approved: false,
+    author: "keren baker",
   },
   {
     id: 6,
@@ -79,6 +84,7 @@ export const donationPosts = [
     amountRaised: 30000,
     featured: true,
     approved: false,
+    author: "sam flair",
   },
 ];
 
