@@ -6,17 +6,22 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { Modals } from "./Contexts/Modals";
 import DeleteModal from "./Components/Common/DeleteModal";
+import { Loader } from "./Contexts/Loader";
+import LoaderContainer from "./Components/Common/Loader";
 
 function App() {
   AOS.init();
 
   return (
     <Messages>
-      <Modals>
-        <Msg />
-        <DeleteModal />
-        <Router />
-      </Modals>
+      <Loader>
+        <Modals>
+          <Msg />
+          <DeleteModal />
+          <LoaderContainer />
+          <Router />
+        </Modals>
+      </Loader>
     </Messages>
   );
 }

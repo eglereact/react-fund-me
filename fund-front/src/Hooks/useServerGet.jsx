@@ -8,24 +8,27 @@ const useServerGet = (url) => {
 
   const { messageError, messageSuccess } = useContext(MessagesContext);
 
-  const doAction = useCallback(() => {
-    axios
-      .get(`${SERVER_URL}${url}`)
-      .then((res) => {
-        messageSuccess(res);
-        setResponse({
-          type: "success",
-          data: res.data,
+  const doAction = useCallback(
+    (dataString = "") => {
+      axios
+        .get(`${SERVER_URL}${url}${dataString}`)
+        .then((res) => {
+          messageSuccess(res);
+          setResponse({
+            type: "success",
+            data: res.data,
+          });
+        })
+        .catch((error) => {
+          messageError(error);
+          setResponse({
+            type: "error",
+            data: error,
+          });
         });
-      })
-      .catch((error) => {
-        messageError(error);
-        setResponse({
-          type: "error",
-          data: error,
-        });
-      });
-  }, [messageError, messageSuccess, url]);
+    },
+    [messageError, messageSuccess, url]
+  );
 
   return { doAction, response };
 };

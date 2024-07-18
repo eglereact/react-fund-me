@@ -32,30 +32,58 @@ const CreatePostForm = () => {
           </h1>
           <p className="text-lg">Please fill the form with all the details!</p>
         </div>
-        <div className="bg-white h-[100vh] w-2/3 rounded-l-[50px]">
-          <div className="bg-gray-100 p-20 flex flex-col gap-4">
-            <input type="text" placeholder="title" />
-            <textarea placeholder="your story"></textarea>
-            <input type="file" />
-            <input type="text" placeholder="amount" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="bg-white h-[100vh] w-2/3 rounded-l-[50px] flex flex-col justify-between">
+          <div className=" p-20 flex flex-col gap-10">
+            <input
+              type="text"
+              placeholder="Title"
+              className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg"
+            />
+            <textarea
+              placeholder="Your story"
+              className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg "
+            ></textarea>
+
+            <input
+              type="file"
+              className="block w-full text-sm text-gray-900
+              file:mr-4 file:py-2 file:px-4 file:rounded-md
+              file:border-0 file:text-sm file:font-semibold
+              file:bg-light file:text-white
+              hover:file:cursor-pointer"
+            />
+
+            <input
+              type="text"
+              placeholder="Amount"
+              className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg "
+            />
+            <div className="flex flex-wrap gap-4">
               {categories.map((cat) => (
                 <div key={cat.id} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    name="category"
-                    id={`category-${cat.id}`}
-                    className="form-checkbox h-5 w-5 text-blue-600"
-                  />
-                  <label
-                    htmlFor={`category-${cat.id}`}
-                    className="text-gray-700"
-                  >
-                    {cat.category}
-                  </label>
+                  <div className="flex">
+                    <input
+                      type="checkbox"
+                      id={`category-${cat.id}`}
+                      className="peer hidden"
+                    />
+                    <label
+                      for={`category-${cat.id}`}
+                      class="select-none cursor-pointer rounded-full border-2 border-gray-300 py-2 px-4 font-bold text-gray-300 transition-colors 
+                      duration-200 ease-in-out peer-checked:bg-green-50 peer-checked:text-light peer-checked:border-[#6DAC4F] "
+                    >
+                      {cat.category}
+                    </label>
+                  </div>
                 </div>
               ))}
             </div>
+          </div>
+          <div className="flex gap-2 p-20 border-t-2 border-t-gray-100  ">
+            <button className="button-light">Create</button>
+            <a href="#" className="button-empty cursor-pointer">
+              Back home
+            </a>
           </div>
         </div>
       </div>

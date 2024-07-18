@@ -7,6 +7,7 @@ const Input = ({
   autoComplete = null,
   errors = {},
   label,
+  disabled = false,
 }) => {
   return (
     <div className="flex flex-col">
@@ -18,6 +19,7 @@ const Input = ({
         name={name}
         onChange={onChange}
         value={value}
+        disabled={disabled}
         placeholder={placeholder}
         autoComplete={autoComplete}
         className={`

@@ -60,7 +60,7 @@ h1 {
   }
 
   .button-light {
-    @apply text-white bg-light px-7 py-3 font-bold rounded hover:hover-bg-light transition-all border-2 border-transparent;
+    @apply text-white bg-light px-7 py-3 font-bold rounded hover:hover-bg-light transition-all;
   }
 
   .button-dark {
