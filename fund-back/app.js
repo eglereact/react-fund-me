@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const mysql = require("mysql");
-// const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 // const fs = require('node:fs');
 const md5 = require("md5");
 const app = express();
@@ -18,7 +18,12 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 // app.use(express.static('public'));
@@ -89,6 +94,58 @@ app.post("/register", (req, res) => {
           .end();
       });
     }
+  });
+});
+
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  const session = uuidv4();
+
+  const sql = `
+            UPDATE users
+            SET session = ?
+            WHERE email = ? AND password = ?
+        `;
+
+  connection.query(sql, [session, email, md5(password)], (err, result) => {
+    if (err) throw err;
+    const logged = result.affectedRows;
+    if (!logged) {
+      res
+        .status(401)
+        .json({
+          message: {
+            type: "error",
+            title: "Bad connection",
+            text: `Wrong credentials`,
+          },
+        })
+        .end();
+      return;
+    }
+    const sql = `
+            SELECT id, name, email, role
+            FROM users
+            WHERE email = ? AND password = ?
+        `;
+    connection.query(sql, [email, md5(password)], (err, rows) => {
+      if (err) throw err;
+      res.cookie("fund-session", session, {
+        maxAge: 1000 * 60 * 60 * 24,
+        httpOnly: true,
+      });
+      res
+        .json({
+          message: {
+            type: "success",
+            title: `Hello, ${rows?.[0]?.name}!`,
+            text: `Welcome to back!`,
+          },
+          session,
+          user: rows?.[0],
+        })
+        .end();
+    });
   });
 });
 

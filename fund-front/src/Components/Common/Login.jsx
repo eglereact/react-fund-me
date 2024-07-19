@@ -1,4 +1,38 @@
+import { useContext, useEffect, useState } from "react";
+import * as l from "../../Constants/urls";
+import useServerPost from "../../Hooks/useServerPost";
+import { LoaderContext } from "../../Contexts/Loader";
+import { AuthContext } from "../../Contexts/Auth";
 const Login = () => {
+  const defaultValues = { email: "", password: "" };
+
+  const [form, setForm] = useState(defaultValues);
+
+  const { doAction, response } = useServerPost(l.SERVER_LOGIN);
+
+  const { setShow } = useContext(LoaderContext);
+
+  const { addUser } = useContext(AuthContext);
+
+  const handleForm = (e) => {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  useEffect(() => {
+    if (null === response) {
+      return;
+    }
+    if (response.type === "success") {
+      addUser(response.data.user);
+      window.location.href = l.SITE_HOME;
+    }
+  }, [response, addUser]);
+
+  const submit = () => {
+    setShow(true);
+    doAction(form);
+  };
+
   return (
     <div className="bg-white min-h-screen flex items-center justify-center">
       <div className="max-w-[1600px] m-auto flex flex-col md:flex-row h-[100vh]">
@@ -20,6 +54,8 @@ const Login = () => {
                 placeholder="jondoe@example.com"
                 autoComplete="email"
                 className="bg-light-grey rounded outline-none p-2"
+                onChange={handleForm}
+                value={form.email}
               />
             </div>
             <div className="flex flex-col">
@@ -28,16 +64,19 @@ const Login = () => {
               </label>
               <input
                 type="password"
-                name="psw"
+                name="password"
                 placeholder="**********"
                 autoComplete="new-password"
                 className="bg-light-grey rounded outline-none p-2"
+                onChange={handleForm}
+                value={form.password}
               />
             </div>
             <div>
               <button
                 className="button-dark active:scale-75 transition-transform"
                 type="button"
+                onClick={submit}
               >
                 Sign In
               </button>
