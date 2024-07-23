@@ -1,8 +1,11 @@
 import { navLinks } from "../../../Data/links";
 import Logo from "../../Common/Logo";
 import * as l from "../../../Constants/urls";
+import { useContext } from "react";
+import { AuthContext } from "../../../Contexts/Auth";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
   return (
     <header>
       <div className="center-all bg-light py-2">
@@ -23,16 +26,30 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <div className="flex gap-2">
-            <a href={l.SITE_LOGIN} className="button-light">
-              Login
-            </a>
-            <a href={l.SITE_REGISTER} className="button-light">
-              Sign Up
-            </a>
-            <a href={l.SITE_DASHBOARD} className="button-light">
-              Admin
-            </a>
+          <div className="flex gap-2 items-center ">
+            {user ? (
+              <>
+                <p className="text-white">
+                  Hello,{" "}
+                  <span className="font-bold capitalize">{user.name}</span>
+                </p>
+                <button type="button" className="button-light py-2">
+                  Logout
+                </button>
+                <a href={l.SITE_DASHBOARD} className="button-light py-2">
+                  Admin
+                </a>
+              </>
+            ) : (
+              <>
+                <a href={l.SITE_LOGIN} className="button-light">
+                  Login
+                </a>
+                <a href={l.SITE_REGISTER} className="button-light">
+                  Sign Up
+                </a>
+              </>
+            )}
           </div>
         </div>
       </nav>

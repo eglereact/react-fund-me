@@ -30,7 +30,65 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+const checkSession = (req, _, next) => {
+  const session = req.cookies["fund-session"];
+  if (!session) {
+    return next();
+  }
+  const sql = `
+        SELECT id, name, email, role 
+        FROM users
+        WHERE session = ?
+    `;
+  connection.query(sql, [session], (err, rows) => {
+    if (err) throw err;
+    if (!rows.length) {
+      return next();
+    }
+    req.user = rows[0];
+    next();
+  });
+};
+
+const checkUserIsAuthorized = (req, res, roles) => {
+  if (!req.user) {
+    res
+      .status(401)
+      .json({
+        message: {
+          type: "error",
+          title: "Unauthorized",
+          text: `You must be logged in`,
+        },
+        reason: "not-logged-in",
+      })
+      .end();
+    return false;
+  }
+  if (!roles.includes(req.user.role)) {
+    res
+      .status(401)
+      .json({
+        message: {
+          type: "error",
+          title: "Unauthorized",
+          text: `You are not authorized to view this information`,
+        },
+        reason: "not-authorized",
+      })
+      .end();
+    return false;
+  }
+  return true;
+};
+
+app.use(checkSession);
+
 app.get("/admin/users", (req, res) => {
+  if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
+    return;
+  }
+
   const sql = `
         SELECT *
         FROM users`;
@@ -99,7 +157,7 @@ app.post("/register", (req, res) => {
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
-  const session = uuidv4();
+  const session = md5(uuidv4());
 
   const sql = `
             UPDATE users
@@ -190,6 +248,10 @@ app.delete("/admin/delete/user/:id", (req, res) => {
 
 app.get("/admin/edit/user/:id", (req, res) => {
   setTimeout((_) => {
+    if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
+      return;
+    }
+
     const { id } = req.params;
     const sql = `
         SELECT id, name, email, role

@@ -12,7 +12,7 @@ const Login = () => {
 
   const { setShow } = useContext(LoaderContext);
 
-  const { addUser } = useContext(AuthContext);
+  const { addUser, removeUser } = useContext(AuthContext);
 
   const handleForm = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -25,6 +25,8 @@ const Login = () => {
     if (response.type === "success") {
       addUser(response.data.user);
       window.location.href = l.SITE_HOME;
+    } else {
+      removeUser();
     }
   }, [response, addUser]);
 

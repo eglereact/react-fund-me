@@ -2,17 +2,23 @@ import { MdDashboard } from "react-icons/md";
 import { FaUsers, FaFile } from "react-icons/fa";
 import Logo from "../../Common/Logo";
 import * as l from "../../../Constants/urls";
+import { useContext } from "react";
+import { AuthContext } from "../../../Contexts/Auth";
 
 const Sidebar = ({ children }) => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="flex flex-col h-screen">
       <div className="bg-darkblue h-16 w-full flex items-center pl-10 justify-between">
         <Logo />
         <div className="center-all gap-4">
-          <h2 className="text-white">Hello, admin</h2>
-          <a href="/#" className="button-light py-2 mr-10">
+          <p className="text-white">
+            Hello, <span className="font-bold capitalize">{user.name}</span>
+          </p>
+          <button type="button" href="/#" className="button-light py-2 mr-10">
             Logout
-          </a>
+          </button>
         </div>
       </div>
       <div className="flex h-full">
