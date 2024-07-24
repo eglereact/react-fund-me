@@ -1,4 +1,5 @@
 import * as l from "../../../Constants/urls";
+import Gate from "../../Common/Gate";
 
 const Banner = () => {
   return (
@@ -26,14 +27,27 @@ const Banner = () => {
             memorial tributes and funerals to medical emergencies and
             nonprofits. Whenever you need assistance, you can ask here.
           </p>
-          <a
-            href={l.CREATE_POST}
-            className="button-light inline-block"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-            Start your fund me
-          </a>
+
+          <Gate status="logged">
+            <a
+              href={l.CREATE_POST}
+              className="button-light inline-block capitalize"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              Start your fund me
+            </a>
+          </Gate>
+          <Gate status="not-logged">
+            <a
+              href={l.SITE_LOGIN}
+              className="button-light inline-block capitalize"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              Start your fund me
+            </a>
+          </Gate>
         </div>
       </div>
     </section>
