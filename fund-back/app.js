@@ -103,6 +103,37 @@ app.get("/admin/users", (req, res) => {
   });
 });
 
+app.get("/admin/posts", (req, res) => {
+  if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
+    return;
+  }
+
+  const sql = `
+        SELECT 
+      p.id,
+      p.title,
+      p.text,
+      p.image,
+      p.amount,
+      p.amountRaised,
+      p.featured,
+      p.approved,
+      p.category,
+      u.name AS authorUsername
+    FROM posts AS p
+    LEFT JOIN users AS u
+      ON p.user_id = u.id`;
+
+  connection.query(sql, (err, rows) => {
+    if (err) throw err;
+    res
+      .json({
+        posts: rows,
+      })
+      .end();
+  });
+});
+
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
 
@@ -239,6 +270,45 @@ app.delete("/admin/delete/user/:id", (req, res) => {
             type: "success",
             title: "User",
             text: `User was deleted.`,
+          },
+        })
+        .end();
+    });
+  }, 1500);
+});
+
+app.delete("/admin/delete/post/:id", (req, res) => {
+  setTimeout(() => {
+    const { id } = req.params;
+
+    const sql = `
+        DELETE 
+        FROM posts 
+        WHERE id = ?
+        `;
+
+    connection.query(sql, [id], (err, result) => {
+      if (err) throw err;
+      const deleted = result.affectedRows;
+      if (!deleted) {
+        res
+          .status(422)
+          .json({
+            message: {
+              type: "info",
+              title: "Posts",
+              text: `Post does not exist.`,
+            },
+          })
+          .end();
+        return;
+      }
+      res
+        .json({
+          message: {
+            type: "success",
+            title: "Post",
+            text: `Post was deleted.`,
           },
         })
         .end();
