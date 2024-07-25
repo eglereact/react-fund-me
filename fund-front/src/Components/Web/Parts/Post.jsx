@@ -1,10 +1,13 @@
 import { BiHappyBeaming } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa";
+import { SERVER_URL } from "../../../Constants/urls";
 
 const Post = ({ post }) => {
   const progress = Math.round(
     Math.min((post.amountRaised / post.amount) * 100, 100)
   );
+
+  console.log("/" + post.image);
 
   if (post.amountRaised === post.amount) {
     return (
@@ -101,7 +104,7 @@ const Post = ({ post }) => {
         </div>
         <div className="w-1/3">
           <img
-            src={post.image}
+            src={"/" + post.image}
             alt={post.title}
             className="object-cover rounded-md"
           />

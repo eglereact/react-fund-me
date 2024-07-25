@@ -4,10 +4,11 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const mysql = require("mysql");
 const { v4: uuidv4 } = require("uuid");
-// const fs = require('node:fs');
+const fs = require("node:fs");
 const md5 = require("md5");
 const app = express();
 const port = 3001;
+const path = require("path");
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -27,8 +28,8 @@ app.use(
 
 app.use(cookieParser());
 // app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 const checkSession = (req, _, next) => {
   const session = req.cookies["fund-session"];
@@ -83,6 +84,94 @@ const checkUserIsAuthorized = (req, res, roles) => {
 };
 
 app.use(checkSession);
+
+const publicImagesPath = path.join(__dirname, "../fund-front/public/images");
+
+const writeImage = (imageBase64) => {
+  if (!imageBase64) {
+    return null;
+  }
+
+  let type;
+  let image;
+  if (imageBase64.startsWith("data:image/png;base64,")) {
+    type = "png";
+    image = Buffer.from(
+      imageBase64.replace(/^data:image\/png;base64,/, ""),
+      "base64"
+    );
+  } else if (imageBase64.startsWith("data:image/jpeg;base64,")) {
+    type = "jpg";
+    image = Buffer.from(
+      imageBase64.replace(/^data:image\/jpeg;base64,/, ""),
+      "base64"
+    );
+  } else {
+    throw new Error("Bad image format");
+  }
+
+  const filename = uuidv4() + "." + type;
+  const imagePath = path.join(publicImagesPath, filename);
+
+  try {
+    fs.writeFileSync(imagePath, image);
+    return filename;
+  } catch (err) {
+    throw new Error("Error saving image");
+  }
+};
+
+app.post("/create-post", (req, res) => {
+  if (!checkUserIsAuthorized(req, res, ["admin", "editor", "user"])) {
+    return;
+  }
+
+  const filename = writeImage(req.body.image);
+
+  const { title, text, category, user_id, amount } = req.body;
+
+  if (!title || !text || !user_id || !amount || !category) {
+    res.status(422).json({
+      message: {
+        type: "danger",
+        text: "Title, text, user_id, amount, category are required.",
+      },
+    });
+    return;
+  }
+
+  const slug = title.toLowerCase().replace(/ /g, "-");
+
+  const sql =
+    "INSERT INTO posts (url, title, text, image, user_id, amount, amountRaised, category, featured, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  connection.query(
+    sql,
+    [
+      slug,
+      title,
+      text,
+      filename !== null ? "images/" + filename : null,
+      user_id,
+      amount,
+      0,
+      category,
+      false,
+      false,
+    ],
+    (err, result) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.json({
+          success: true,
+          id: result.insertId,
+          uuid: req.body.id,
+          message: { type: "success", text: "Nice! Post added!" },
+        });
+      }
+    }
+  );
+});
 
 app.get("/admin/users", (req, res) => {
   if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
