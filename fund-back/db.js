@@ -100,10 +100,10 @@ const seedPostsTable = () => {
 };
 
 dropUsersTable();
-createUsersTable();
-seedUsersTable();
 dropPostsTable();
+createUsersTable();
 createPostsTable();
+seedUsersTable();
 seedPostsTable();
 
 connection.end(function (err) {

@@ -22,6 +22,10 @@ const categories = [
   { id: 21, category: "Wishes" },
 ];
 
+const defaultValues = {
+  name: "",
+};
+
 const CreatePostForm = () => {
   return (
     <div className="bg-light-grey w-full  h-[100vh]">

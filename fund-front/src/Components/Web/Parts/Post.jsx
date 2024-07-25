@@ -2,9 +2,11 @@ import { BiHappyBeaming } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa";
 
 const Post = ({ post }) => {
-  const progress = Math.min((post.amountRaised / post.moneyGoal) * 100, 100);
+  const progress = Math.round(
+    Math.min((post.amountRaised / post.amount) * 100, 100)
+  );
 
-  if (post.amountRaised === post.moneyGoal) {
+  if (post.amountRaised === post.amount) {
     return (
       <div
         data-aos="fade-up"
@@ -20,7 +22,7 @@ const Post = ({ post }) => {
         />
         <div className="w-2/3 flex flex-col gap-3">
           <h2 className="text-2xl font-bold mt-4 text-dark">{post.title}</h2>
-          <p className="text-gray-900 mt-2 pb-4 h-16">{post.shortText}</p>
+          <p className="text-gray-900 mt-2 pb-4 h-16">{post.text}</p>
           <div className="mt-4">
             <div className="bg-gray-200 rounded-full h-2 relative">
               <div
@@ -41,8 +43,7 @@ const Post = ({ post }) => {
               <span className="text-light">
                 <FaCheck />
               </span>
-              Goal:{" "}
-              <span className="text-dark font-bold">${post.moneyGoal} </span>
+              Goal: <span className="text-dark font-bold">${post.amount} </span>
             </p>
           </div>
         </div>
@@ -67,7 +68,8 @@ const Post = ({ post }) => {
       >
         <div className="w-2/3 flex flex-col gap-3">
           <h2 className="text-2xl font-bold mt-4 text-dark">{post.title}</h2>
-          <p className="text-gray-900 mt-2 pb-4">{post.shortText}</p>
+          <p className="font-bold uppercase">{post.authorUsername}</p>
+          <p className="text-gray-900 mt-2 pb-4">{post.text}</p>
           <div className="mt-4">
             <div className="bg-gray-200 rounded-full h-2 relative">
               <div
@@ -85,8 +87,7 @@ const Post = ({ post }) => {
               ></div>
             </div>
             <p className="text-gray-900 mt-2 text-lg">
-              Goal:{" "}
-              <span className="text-dark font-bold">${post.moneyGoal} </span>
+              Goal: <span className="text-dark font-bold">${post.amount} </span>
             </p>
           </div>
           <div className="py-2 flex gap-2">

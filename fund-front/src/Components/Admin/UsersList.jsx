@@ -32,12 +32,9 @@ const UsersList = () => {
     setUsers((u) => u.filter((u) => !u.hidden));
   }, []);
 
-  useEffect(
-    (_) => {
-      doGet();
-    },
-    [doGet]
-  );
+  useEffect(() => {
+    doGet();
+  }, [doGet]);
 
   useEffect(
     (_) => {

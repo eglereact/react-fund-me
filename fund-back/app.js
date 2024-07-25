@@ -134,6 +134,33 @@ app.get("/admin/posts", (req, res) => {
   });
 });
 
+app.get("/web/posts", (req, res) => {
+  const sql = `
+        SELECT 
+      p.id,
+      p.title,
+      p.text,
+      p.image,
+      p.amount,
+      p.amountRaised,
+      p.featured,
+      p.approved,
+      p.category,
+      u.name AS authorUsername
+    FROM posts AS p
+    LEFT JOIN users AS u
+      ON p.user_id = u.id`;
+
+  connection.query(sql, (err, rows) => {
+    if (err) throw err;
+    res
+      .json({
+        posts: rows,
+      })
+      .end();
+  });
+});
+
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
 

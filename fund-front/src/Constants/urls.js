@@ -7,6 +7,7 @@ export const SITE_REGISTER = "#register";
 export const SITE_HOME = "#";
 export const REDIRECT_AFTER_REGISTER = "#login";
 export const CREATE_POST = "#create/fundraiser";
+export const SITE_GET_POSTS = "web/posts";
 
 // Admin URLs
 export const SITE_DASHBOARD = "#admin/dashboard";
