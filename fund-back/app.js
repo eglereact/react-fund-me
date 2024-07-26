@@ -173,6 +173,42 @@ app.post("/create-post", (req, res) => {
   );
 });
 
+app.post("/create-donation", (req, res) => {
+  const { sponsorName, post_id, donationAmount } = req.body;
+
+  if (!sponsorName || !post_id || !donationAmount) {
+    res.status(422).json({
+      message: {
+        type: "danger",
+        text: "Name, post ID, and amount are required.",
+      },
+    });
+    return;
+  }
+
+  const sql = `
+    INSERT INTO donations (sponsorName, post_id, donationAmount, created_at)
+    VALUES (?, ?, ?, now())
+  `;
+
+  connection.query(
+    sql,
+    [sponsorName, post_id, donationAmount],
+    (err, result) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.json({
+          success: true,
+          id: result.insertId,
+          uuid: req.body.id,
+          message: { type: "success", text: "Nice! Donation added!" },
+        });
+      }
+    }
+  );
+});
+
 app.get("/admin/users", (req, res) => {
   if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
     return;
@@ -576,7 +612,7 @@ app.get("/donate/post/:id", (req, res) => {
   setTimeout(() => {
     const { id } = req.params;
     const sql = `
-        SELECT title, amount , amountRaised
+        SELECT id, title, amount , amountRaised
         FROM posts
         WHERE id = ?
         `;
