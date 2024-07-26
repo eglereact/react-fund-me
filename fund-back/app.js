@@ -225,7 +225,7 @@ app.get("/admin/posts", (req, res) => {
 
 app.get("/web/posts", (req, res) => {
   const sql = `
-        SELECT 
+    SELECT 
       p.id,
       p.title,
       p.text,
@@ -237,16 +237,15 @@ app.get("/web/posts", (req, res) => {
       p.category,
       u.name AS authorUsername
     FROM posts AS p
-    LEFT JOIN users AS u
-      ON p.user_id = u.id`;
+    LEFT JOIN users AS u ON p.user_id = u.id
+    WHERE p.approved = 1`;
 
   connection.query(sql, (err, rows) => {
-    if (err) throw err;
-    res
-      .json({
-        posts: rows,
-      })
-      .end();
+    if (err) {
+      res.status(500).json({ error: "Database query error" });
+      return;
+    }
+    res.json({ posts: rows }).end();
   });
 });
 
@@ -544,6 +543,86 @@ app.put("/admin/update/user/:id", (req, res) => {
         }
       );
     }
+  }, 1500);
+});
+
+app.get("/admin/edit/post/:id", (req, res) => {
+  setTimeout((_) => {
+    if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
+      return;
+    }
+
+    const { id } = req.params;
+    const sql = `
+        SELECT id, title, text, approved, featured, amount, category
+        FROM posts
+        WHERE id = ?
+        `;
+    connection.query(sql, [id], (err, rows) => {
+      if (err) throw err;
+      if (!rows.length) {
+        res
+          .status(404)
+          .json({
+            message: {
+              type: "info",
+              title: "Posts",
+              text: `Post does not exist.`,
+            },
+          })
+          .end();
+        return;
+      }
+      res
+        .json({
+          user: rows[0],
+        })
+        .end();
+    });
+  }, 1500);
+});
+
+app.put("/admin/update/post/:id", (req, res) => {
+  setTimeout(() => {
+    const { id } = req.params;
+    const { title, text, approved, featured, amount, category } = req.body;
+
+    const sql = `
+            UPDATE posts
+            SET title = ?, text = ?, approved = ?, featured = ?, amount = ?, category = ?
+            WHERE id = ?
+            `;
+
+    connection.query(
+      sql,
+      [title, text, approved, featured, amount, category, id],
+      (err, result) => {
+        if (err) throw err;
+        const updated = result.affectedRows;
+        if (!updated) {
+          res
+            .status(404)
+            .json({
+              message: {
+                type: "info",
+                title: "Posts",
+                text: `Post does not exist.`,
+              },
+            })
+            .end();
+          return;
+        }
+        res
+          .json({
+            message: {
+              type: "success",
+              title: "Posts",
+              text: `Post was updated`,
+            },
+          })
+          .end();
+      }
+    );
   }, 1500);
 });
 

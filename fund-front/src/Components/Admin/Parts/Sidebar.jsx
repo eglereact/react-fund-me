@@ -23,6 +23,9 @@ const Sidebar = ({ children }) => {
                 <span className="font-bold capitalize">{user?.name}</span>
               </p>
               <Logout />
+              <a className="button-light py-2" href={l.SITE_HOME}>
+                Home
+              </a>
             </div>
           </div>
           <div className="flex h-full">
@@ -50,7 +53,7 @@ const Sidebar = ({ children }) => {
                 </li>
                 <li className="mb-4 h-10">
                   <a
-                    href="/#posts"
+                    href={l.POSTS_LIST}
                     className={`text-xs flex flex-col items-center md:text-lg md:flex-row md:gap-2`}
                   >
                     <FaFile className="text-lg md:text-xl " />

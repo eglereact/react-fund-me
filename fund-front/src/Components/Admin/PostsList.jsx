@@ -178,12 +178,13 @@ const PostsList = () => {
                         >
                           Delete
                         </button>
-                        <button
+                        <a
+                          href={l.POST_EDIT + "/" + post.id}
                           type="button"
                           className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800"
                         >
                           Edit
-                        </button>
+                        </a>
                       </td>
                     </tr>
                   ))}

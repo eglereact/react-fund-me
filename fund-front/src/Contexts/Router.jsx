@@ -9,6 +9,7 @@ import Sidebar from "../Components/Admin/Parts/Sidebar";
 import PostsList from "../Components/Admin/PostsList";
 import * as l from "../Constants/urls";
 import UserEdit from "../Components/Admin/UserEdit";
+import PostEdit from "../Components/Admin/PostEdit";
 import CreatePostForm from "../Components/Forms/CreatePostForm";
 
 const RouterContext = createContext([]);
@@ -78,11 +79,22 @@ const Router = () => {
       component: <CreatePostForm />,
     },
     {
-      path: "#posts",
-      pc: 0,
+      path: l.POSTS_LIST,
+      pc: 1,
+      p1: "posts",
       component: (
         <Sidebar>
           <PostsList />
+        </Sidebar>
+      ),
+    },
+    {
+      path: l.POST_EDIT,
+      pc: 2,
+      p1: "post-edit",
+      component: (
+        <Sidebar>
+          <PostEdit />
         </Sidebar>
       ),
     },

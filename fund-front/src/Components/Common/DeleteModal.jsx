@@ -52,16 +52,23 @@ export default function DeleteModal() {
                     className="text-base font-semibold leading-6 text-gray-900"
                     id="modal-title"
                   >
-                    Delete account
+                    {deleteModal.data.title &&
+                      `Delete post "${deleteModal.data.title}"`}
+                    {deleteModal.data.name &&
+                      `Delete ${deleteModal.data.name}'s account`}
                   </h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to delete{" "}
-                      <span className="font-bold text-gray-900 uppercase">
-                        {deleteModal.data.name}
-                      </span>{" "}
-                      account? All of data will be permanently removed. This
-                      action cannot be undone.
+                      Are you sure you want to{" "}
+                      <span className="uppercase text-red-600 font-bold">
+                        delete{" "}
+                        {deleteModal.data.title &&
+                          `post "${deleteModal.data.title}"`}
+                        {deleteModal.data.name &&
+                          `${deleteModal.data.name}'s account `}
+                      </span>
+                      ? All of data will be permanently removed. This action
+                      cannot be undone.
                     </p>
                   </div>
                 </div>
