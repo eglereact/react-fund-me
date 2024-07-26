@@ -12,6 +12,7 @@ import UserEdit from "../Components/Admin/UserEdit";
 import PostEdit from "../Components/Admin/PostEdit";
 import CreatePostForm from "../Components/Forms/CreatePostForm";
 import Donate from "../Components/Web/Parts/Donate";
+import DonationsList from "../Components/Admin/DonationsList";
 
 const RouterContext = createContext([]);
 
@@ -92,6 +93,16 @@ const Router = () => {
       component: (
         <Sidebar>
           <PostsList />
+        </Sidebar>
+      ),
+    },
+    {
+      path: l.DONATIONS_LIST,
+      pc: 1,
+      p1: "donations",
+      component: (
+        <Sidebar>
+          <DonationsList />
         </Sidebar>
       ),
     },

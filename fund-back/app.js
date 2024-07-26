@@ -192,6 +192,32 @@ app.get("/admin/users", (req, res) => {
   });
 });
 
+app.get("/admin/donations", (req, res) => {
+  if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
+    return;
+  }
+
+  const sql = `
+        SELECT 
+          d.id,
+          d.sponsorName,
+          d.post_id,
+          d.donationAmount,
+          p.title AS postTitle,
+          d.created_at
+        FROM donations AS d
+        JOIN posts AS p ON d.post_id = p.id`;
+
+  connection.query(sql, (err, rows) => {
+    if (err) throw err;
+    res
+      .json({
+        donations: rows,
+      })
+      .end();
+  });
+});
+
 app.get("/admin/posts", (req, res) => {
   if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
     return;

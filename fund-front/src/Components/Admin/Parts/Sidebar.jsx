@@ -1,5 +1,5 @@
 import { MdDashboard } from "react-icons/md";
-import { FaUsers, FaFile } from "react-icons/fa";
+import { FaUsers, FaFile, FaDonate } from "react-icons/fa";
 import Logo from "../../Common/Logo";
 import * as l from "../../../Constants/urls";
 import { useContext } from "react";
@@ -58,6 +58,15 @@ const Sidebar = ({ children }) => {
                   >
                     <FaFile className="text-lg md:text-xl " />
                     <span className="flex">Posts</span>
+                  </a>
+                </li>
+                <li className="mb-4 h-10">
+                  <a
+                    href={l.DONATIONS_LIST}
+                    className={`text-xs flex flex-col items-center md:text-lg md:flex-row md:gap-2`}
+                  >
+                    <FaDonate className="text-lg md:text-xl " />
+                    <span className="flex">Donations</span>
                   </a>
                 </li>
               </ul>
