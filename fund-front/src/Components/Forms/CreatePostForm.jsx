@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import useServerPost from "../../Hooks/useServerPost";
 import * as l from "../../Constants/urls";
 import { AuthContext } from "../../Contexts/Auth";
@@ -26,6 +26,8 @@ const CreatePostForm = () => {
   const { doAction, response } = useServerPost("create-post");
 
   const { user } = useContext(AuthContext);
+
+  const fileInputRef = useRef(null);
 
   const imageReader = (img) => {
     return new Promise((resolve, reject) => {
@@ -78,6 +80,13 @@ const CreatePostForm = () => {
     });
   };
 
+  const clearFileInput = () => {
+    setImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="bg-light-grey w-full h-[100vh]">
       <div className="max-w-[1920px] flex">
@@ -88,7 +97,7 @@ const CreatePostForm = () => {
           <p className="text-lg">Please fill the form with all the details!</p>
         </div>
         <div className="bg-white h-[100vh] w-2/3 rounded-l-[50px] flex flex-col justify-between">
-          <form onSubmit={handleSubmit} className="p-20 flex flex-col gap-10">
+          <form onSubmit={handleSubmit} className="p-14 flex flex-col gap-10">
             <input
               type="text"
               placeholder="Title"
@@ -104,13 +113,6 @@ const CreatePostForm = () => {
               onChange={handleChange}
               id="text"
             ></textarea>
-
-            <input
-              type="file"
-              className="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-light file:text-white hover:file:cursor-pointer"
-              onChange={readImage}
-              id="image"
-            />
 
             <input
               type="text"
@@ -142,7 +144,29 @@ const CreatePostForm = () => {
                 </div>
               ))}
             </div>
-            <div className="flex gap-2 p-20 border-t-2 border-t-gray-100">
+            <div>
+              <input
+                type="file"
+                className="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-light file:text-white hover:file:cursor-pointer"
+                onChange={readImage}
+                id="image"
+                ref={fileInputRef}
+              />
+
+              {image && (
+                <div className="mt-4 flex">
+                  <img src={image} alt={form.name} className="w-64" />
+                  <div
+                    onClick={clearFileInput}
+                    className="w-6 center-all h-6 bg-black/70 text-white cursor-pointer"
+                  >
+                    <p>X</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="flex gap-2 pt-4 border-t-2 border-t-gray-100">
               <button
                 type="submit"
                 className="button-light"
