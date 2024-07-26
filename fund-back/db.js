@@ -77,11 +77,37 @@ const createPostsTable = () => {
   });
 };
 
+const createDonationsTable = () => {
+  const sql = `
+    CREATE TABLE IF NOT EXISTS donations (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      sponsorName VARCHAR(255) NOT NULL,
+      post_id INT NOT NULL,
+      donationAmount DECIMAL(10, 2) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+    ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  `;
+  connection.query(sql, function (err) {
+    if (err) throw err;
+    console.log("Donations table created");
+  });
+};
+
 const dropPostsTable = () => {
   const sql = "DROP TABLE IF EXISTS posts";
   connection.query(sql, function (err) {
     if (err) throw err;
     console.log("Posts table dropped");
+  });
+};
+
+const dropDonationsTable = () => {
+  const sql = "DROP TABLE IF EXISTS donations";
+  connection.query(sql, function (err) {
+    if (err) throw err;
+    console.log("Donations table dropped");
   });
 };
 
@@ -99,12 +125,38 @@ const seedPostsTable = () => {
   });
 };
 
+const seedDonationsTable = () => {
+  const donations = [
+    { sponsorName: "Alice Johnson", post_id: 1, donationAmount: 100.0 },
+    { sponsorName: "Bob Smith", post_id: 2, donationAmount: 150.0 },
+    { sponsorName: "Charlie Brown", post_id: 3, donationAmount: 200.0 },
+    { sponsorName: "Diana Prince", post_id: 4, donationAmount: 250.0 },
+    { sponsorName: "Eve Adams", post_id: 5, donationAmount: 300.0 },
+  ];
+
+  const sql =
+    "INSERT INTO donations (sponsorName, post_id, donationAmount) VALUES ?";
+  const values = donations.map((donation) => [
+    donation.sponsorName,
+    donation.post_id,
+    donation.donationAmount,
+  ]);
+
+  connection.query(sql, [values], function (err, result) {
+    if (err) throw err;
+    console.log("Number of records inserted: " + result.affectedRows);
+  });
+};
+
 dropUsersTable();
 dropPostsTable();
+dropDonationsTable();
 createUsersTable();
 createPostsTable();
+createDonationsTable();
 seedUsersTable();
 seedPostsTable();
+seedDonationsTable();
 
 connection.end(function (err) {
   if (err) throw err;

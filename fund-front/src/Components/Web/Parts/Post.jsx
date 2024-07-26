@@ -1,13 +1,11 @@
 import { BiHappyBeaming } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa";
-import { SERVER_URL } from "../../../Constants/urls";
+import * as l from "../../../Constants/urls";
 
 const Post = ({ post }) => {
   const progress = Math.round(
     Math.min((post.amountRaised / post.amount) * 100, 100)
   );
-
-  console.log("/" + post.image);
 
   if (post.amountRaised === post.amount) {
     return (
@@ -94,7 +92,10 @@ const Post = ({ post }) => {
             </p>
           </div>
           <div className="py-2 flex gap-2">
-            <a href="/#login" className="button-light rounded-full">
+            <a
+              href={l.SITE_DONATE + "/" + post.id}
+              className="button-light rounded-full"
+            >
               Donate
             </a>
             <a href="/#" className="button-empty rounded-full">

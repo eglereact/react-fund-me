@@ -546,6 +546,82 @@ app.put("/admin/update/user/:id", (req, res) => {
   }, 1500);
 });
 
+app.get("/donate/post/:id", (req, res) => {
+  setTimeout(() => {
+    const { id } = req.params;
+    const sql = `
+        SELECT title, amount , amountRaised
+        FROM posts
+        WHERE id = ?
+        `;
+    connection.query(sql, [id], (err, rows) => {
+      if (err) throw err;
+      if (!rows.length) {
+        res
+          .status(404)
+          .json({
+            message: {
+              type: "info",
+              title: "Post",
+              text: `Post does not exist.`,
+            },
+          })
+          .end();
+        return;
+      }
+      res
+        .json({
+          post: rows[0],
+        })
+        .end();
+    });
+  }, 1500);
+});
+
+// app.put("/donated/post/:id", (req, res) => {
+//   setTimeout(() => {
+//     const { id } = req.params;
+//     const { amount } = req.body;
+
+//     const sql = `
+//             UPDATE posts
+//             SET title = ?, text = ?, approved = ?, featured = ?, amount = ?, category = ?
+//             WHERE id = ?
+//             `;
+
+//     connection.query(
+//       sql,
+//       [title, text, approved, featured, amount, category, id],
+//       (err, result) => {
+//         if (err) throw err;
+//         const updated = result.affectedRows;
+//         if (!updated) {
+//           res
+//             .status(404)
+//             .json({
+//               message: {
+//                 type: "info",
+//                 title: "Posts",
+//                 text: `Post does not exist.`,
+//               },
+//             })
+//             .end();
+//           return;
+//         }
+//         res
+//           .json({
+//             message: {
+//               type: "success",
+//               title: "Posts",
+//               text: `Post was updated`,
+//             },
+//           })
+//           .end();
+//       }
+//     );
+//   }, 1500);
+// });
+
 app.get("/admin/edit/post/:id", (req, res) => {
   setTimeout((_) => {
     if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
