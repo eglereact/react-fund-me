@@ -79,4 +79,8 @@ body {
   .max-width {
     @apply max-w-[1200px];
   }
+
+  .donation-button-number {
+    @apply border-2 border-[#6DAC4FFF] p-3 rounded-lg focus:bg-[#EFEFE8FF] font-bold focus:text-[#6DAC4FFF];
+  }
 }

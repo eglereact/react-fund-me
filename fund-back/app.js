@@ -338,7 +338,8 @@ app.get("/web/posts", (req, res) => {
       u.name AS authorUsername
     FROM posts AS p
     LEFT JOIN users AS u ON p.user_id = u.id
-    WHERE p.approved = 1`;
+    WHERE p.approved = 1
+     ORDER BY (p.amount - p.amountRaised) DESC`;
 
   connection.query(sql, (err, rows) => {
     if (err) {
@@ -650,10 +651,11 @@ app.get("/donate/post/:id", (req, res) => {
   setTimeout(() => {
     const { id } = req.params;
     const sql = `
-        SELECT id, title, amount , amountRaised
-        FROM posts
-        WHERE id = ?
-        `;
+    SELECT p.*, u.name AS authorUsername
+    FROM posts AS p
+    LEFT JOIN users AS u ON p.user_id = u.id
+    WHERE p.id = ?
+    `;
     connection.query(sql, [id], (err, rows) => {
       if (err) throw err;
       if (!rows.length) {
