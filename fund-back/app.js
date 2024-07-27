@@ -209,6 +209,44 @@ app.post("/create-donation", (req, res) => {
   );
 });
 
+app.put("/update/post-donation/:id", (req, res) => {
+  const { donationAmount } = req.body;
+  const postId = req.params.id;
+
+  if (!donationAmount || isNaN(parseFloat(donationAmount))) {
+    res.status(422).json({
+      message: {
+        type: "danger",
+        text: "Valid donation amount is required.",
+      },
+    });
+    return;
+  }
+
+  const sql = `
+    UPDATE posts 
+    SET amountRaised = amountRaised + ?
+    WHERE id = ?`;
+
+  connection.query(sql, [parseFloat(donationAmount), postId], (err, result) => {
+    if (err) {
+      res.status(500).send(err);
+    } else if (result.affectedRows === 0) {
+      res.status(404).json({
+        message: {
+          type: "info",
+          text: "Post not found.",
+        },
+      });
+    } else {
+      res.json({
+        success: true,
+        message: { type: "success", text: "Amount updated successfully!" },
+      });
+    }
+  });
+});
+
 app.get("/admin/users", (req, res) => {
   if (!checkUserIsAuthorized(req, res, ["admin", "editor"])) {
     return;

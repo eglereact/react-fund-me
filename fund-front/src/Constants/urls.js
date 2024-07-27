@@ -27,6 +27,7 @@ export const SERVER_EDIT_USER = "admin/edit/user";
 export const SERVER_UPDATE_USER = "admin/update/user";
 export const SERVER_EDIT_POST = "admin/edit/post";
 export const SERVER_UPDATE_POST = "admin/update/post";
+export const SERVER_UPDATE_POST_DONATION = "update/post-donation";
 export const SERVER_DONATE = "donate/post";
 
 export const SERVER_GET_POSTS = "admin/posts";

@@ -5,6 +5,7 @@ import useServerGet from "../../../Hooks/useServerGet";
 import { LoaderContext } from "../../../Contexts/Loader";
 import useServerPost from "../../../Hooks/useServerPost";
 import { AuthContext } from "../../../Contexts/Auth";
+import useServerPut from "../../../Hooks/useServerPut";
 
 const Donate = () => {
   const defaultValues = {
@@ -18,6 +19,9 @@ const Donate = () => {
     l.SERVER_DONATE
   );
 
+  const { doAction: doPut, serverResponse: serverPutResponse } = useServerPut(
+    l.SERVER_UPDATE_POST_DONATION
+  );
   const { setShow } = useContext(LoaderContext);
   const [post, setPost] = useState(null);
   const [form, setForm] = useState(defaultValues);
@@ -53,6 +57,15 @@ const Donate = () => {
     // }
   }, [response]);
 
+  useEffect(() => {
+    if (null === serverPutResponse) {
+      return;
+    }
+    if ("success" === serverPutResponse.type) {
+      window.location.href = l.POSTS_LIST;
+    }
+  }, [serverPutResponse]);
+
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.id]: e.target.value }));
   };
@@ -63,11 +76,14 @@ const Donate = () => {
     // if (!validate(form)) return;
 
     setButtonDisabled(true);
+    setShow(true);
     doAction({
       ...form,
       post_id: post.id,
       sponsorName: user?.name || form.sponsorName,
     });
+
+    doPut({ ...post, donationAmount: form.donationAmount });
   };
 
   return (

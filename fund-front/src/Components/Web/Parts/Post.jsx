@@ -7,7 +7,7 @@ const Post = ({ post }) => {
     Math.min((post.amountRaised / post.amount) * 100, 100)
   );
 
-  if (post.amountRaised === post.amount) {
+  if (post.amountRaised >= post.amount) {
     return (
       <div
         data-aos="fade-up"
