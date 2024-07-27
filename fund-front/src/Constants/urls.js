@@ -9,6 +9,7 @@ export const REDIRECT_AFTER_REGISTER = "#login";
 export const CREATE_POST = "#create/fundraiser";
 export const SITE_GET_POSTS = "web/posts";
 export const SITE_DONATE = "#donate/post";
+export const SITE_MORE = "#more/post";
 
 // Admin URLs
 export const SITE_DASHBOARD = "#admin/dashboard";
@@ -29,6 +30,8 @@ export const SERVER_EDIT_POST = "admin/edit/post";
 export const SERVER_UPDATE_POST = "admin/update/post";
 export const SERVER_UPDATE_POST_DONATION = "update/post-donation";
 export const SERVER_DONATE = "donate/post";
+export const SERVER_MORE = "more/post";
+export const SERVER_MORE_DONATIONS_LIST = "more/post-donations-list";
 
 export const SERVER_GET_POSTS = "admin/posts";
 export const SERVER_DELETE_POST = "admin/delete/post";

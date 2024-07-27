@@ -678,49 +678,70 @@ app.get("/donate/post/:id", (req, res) => {
   }, 1500);
 });
 
-// app.put("/donated/post/:id", (req, res) => {
-//   setTimeout(() => {
-//     const { id } = req.params;
-//     const { amount } = req.body;
+app.get("/more/post/:id", (req, res) => {
+  setTimeout(() => {
+    const { id } = req.params;
+    const sql = `
+    SELECT p.*, u.name AS authorUsername
+    FROM posts AS p
+    LEFT JOIN users AS u ON p.user_id = u.id
+    WHERE p.id = ?
+    `;
+    connection.query(sql, [id], (err, rows) => {
+      if (err) throw err;
+      if (!rows.length) {
+        res
+          .status(404)
+          .json({
+            message: {
+              type: "info",
+              title: "Post",
+              text: `Post does not exist.`,
+            },
+          })
+          .end();
+        return;
+      }
+      res
+        .json({
+          post: rows[0],
+        })
+        .end();
+    });
+  }, 1500);
+});
 
-//     const sql = `
-//             UPDATE posts
-//             SET title = ?, text = ?, approved = ?, featured = ?, amount = ?, category = ?
-//             WHERE id = ?
-//             `;
+app.get("/more/post-donations-list/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = `
+      SELECT d.*, p.title AS postTitle
+      FROM donations d
+      INNER JOIN posts p ON d.post_id = p.id
+      WHERE d.post_id = ?
+      `;
 
-//     connection.query(
-//       sql,
-//       [title, text, approved, featured, amount, category, id],
-//       (err, result) => {
-//         if (err) throw err;
-//         const updated = result.affectedRows;
-//         if (!updated) {
-//           res
-//             .status(404)
-//             .json({
-//               message: {
-//                 type: "info",
-//                 title: "Posts",
-//                 text: `Post does not exist.`,
-//               },
-//             })
-//             .end();
-//           return;
-//         }
-//         res
-//           .json({
-//             message: {
-//               type: "success",
-//               title: "Posts",
-//               text: `Post was updated`,
-//             },
-//           })
-//           .end();
-//       }
-//     );
-//   }, 1500);
-// });
+  connection.query(sql, [id], (err, rows) => {
+    if (err) throw err;
+    if (!rows.length) {
+      res
+        .status(404)
+        .json({
+          message: {
+            type: "info",
+            title: "Post",
+            text: `No donations found for the post with ID ${id}.`,
+          },
+        })
+        .end();
+      return;
+    }
+    res
+      .json({
+        donations: rows,
+      })
+      .end();
+  });
+});
 
 app.get("/admin/edit/post/:id", (req, res) => {
   setTimeout((_) => {

@@ -4,7 +4,7 @@ import Gate from "../../Common/Gate";
 const Banner = () => {
   return (
     <section className="bg-light-grey p-20">
-      <div className="max-w-[1200px] m-auto center-all">
+      <div className="max-width m-auto center-all">
         <div className="w-1/2" data-aos="fade-right">
           <img src="./images/banner.svg" alt="Better World" />
         </div>

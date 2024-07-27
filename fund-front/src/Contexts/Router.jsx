@@ -13,6 +13,7 @@ import PostEdit from "../Components/Admin/PostEdit";
 import CreatePostForm from "../Components/Forms/CreatePostForm";
 import Donate from "../Components/Web/Parts/Donate";
 import DonationsList from "../Components/Admin/DonationsList";
+import More from "../Components/Web/More";
 
 const RouterContext = createContext([]);
 
@@ -85,6 +86,12 @@ const Router = () => {
       pc: 2,
       p1: "post",
       component: <Donate />,
+    },
+    {
+      path: l.SITE_MORE,
+      pc: 2,
+      p1: "post",
+      component: <More />,
     },
     {
       path: l.POSTS_LIST,

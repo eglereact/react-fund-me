@@ -21,6 +21,7 @@ const Post = ({ post }) => {
           src="./images/ty2.png"
           className="absolute w-32 left-64 bottom-2  z-10 fill-slate-900  -rotate-6"
         />
+
         <div className="w-2/3 flex flex-col gap-3">
           <h2 className="text-2xl font-bold mt-4 text-dark">{post.title}</h2>
           <p className="text-gray-900 mt-2 pb-4 h-16">{post.text}</p>
@@ -46,6 +47,14 @@ const Post = ({ post }) => {
               </span>
               Goal: <span className="text-dark font-bold">${post.amount} </span>
             </p>
+            <div className="mt-10">
+              <a
+                href={l.SITE_MORE + "/" + post.id}
+                className="button-empty rounded-full"
+              >
+                More
+              </a>
+            </div>
           </div>
         </div>
         <div className="w-1/3">
@@ -98,7 +107,10 @@ const Post = ({ post }) => {
             >
               Donate
             </a>
-            <a href="/#" className="button-empty rounded-full">
+            <a
+              href={l.SITE_MORE + "/" + post.id}
+              className="button-empty rounded-full"
+            >
               More
             </a>
           </div>

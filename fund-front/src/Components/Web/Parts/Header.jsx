@@ -16,7 +16,7 @@ const Header = () => {
         </p>
       </div>
       <nav className="bg-dark">
-        <div className="max-w-[1200px] m-auto flex items-center justify-between h-24">
+        <div className="max-width m-auto flex items-center justify-between h-24">
           <Logo />
           <ul className="center-all space-x-10 text-white text-lg">
             {navLinks.map((link) => (

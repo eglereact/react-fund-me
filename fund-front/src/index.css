@@ -8,11 +8,16 @@
 
 body {
   font-family: "Poppins", sans-serif;
-}
+  }
+  
+  h1 {
+    font-family: "Sintony", sans-serif;
+    } */
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet:wght@100..400&display=swap");
 
-h1 {
-  font-family: "Sintony", sans-serif;
-} */
+.donation-button {
+  font-family: "Playwrite DK Uloopet", cursive;
+}
 
 @layer components {
   .center-all {
@@ -69,5 +74,9 @@ h1 {
 
   .button-empty {
     @apply text-light bg-transparent px-7 py-3 font-bold rounded hover:bg-light transition-all hover:text-white border-2 border-[#6DAC4FFF];
+  }
+
+  .max-width {
+    @apply max-w-[1200px];
   }
 }
