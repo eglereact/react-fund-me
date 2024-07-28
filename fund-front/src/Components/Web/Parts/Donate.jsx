@@ -35,6 +35,7 @@ const Donate = () => {
   const { errors, validate, setServerErrors } = useDonate();
 
   console.log(errors);
+  console.log(form);
 
   useEffect(() => {
     doGet("/" + params[1]);
@@ -72,6 +73,12 @@ const Donate = () => {
     }
   }, [serverPutResponse]);
 
+  useEffect(() => {
+    if (user) {
+      setForm((f) => ({ ...f, sponsorName: user.name }));
+    }
+  }, [user]);
+
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.id]: e.target.value }));
   };
@@ -90,7 +97,7 @@ const Donate = () => {
     doAction({
       ...form,
       post_id: post.id,
-      sponsorName: user?.name || form.sponsorName,
+      // sponsorName: user?.name || form.sponsorName,
     });
 
     doPut({ ...post, donationAmount: form.donationAmount });
@@ -180,7 +187,7 @@ const Donate = () => {
                       placeholder="Your name"
                       type="text"
                       className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg w-full"
-                      value={user?.name ?? form.sponsorName}
+                      value={form.sponsorName}
                       onChange={handleChange}
                       id="sponsorName"
                       name="sponsorName"

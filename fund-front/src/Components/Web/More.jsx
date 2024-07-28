@@ -88,10 +88,10 @@ const More = () => {
                 </p>
               </div>
               <div className="bg-white shadow-sm rounded-lg center-all relative p-2">
-                <img src="images/donate.png" alt="Donate" className="w-40" />
+                <img src="images/donate.png" alt="Donate" className="w-60" />
                 <div className="absolute flex items-center justify-center ">
                   {post?.amountRaised >= post?.amount ? (
-                    <p className="donation-button rounded-full inline-block text-dark font-bold text-md">
+                    <p className="donation-button rounded-full inline-block text-dark font-bold text-lg">
                       Thank you
                     </p>
                   ) : (
@@ -99,7 +99,7 @@ const More = () => {
                       href={l.SITE_DONATE + "/" + post?.id}
                       className="px-8 hover:text-light transition-all py-16 donation-button rounded-full inline-block text-dark font-bold text-xl"
                     >
-                      Donate
+                      Click here <br /> to Donate
                     </a>
                   )}
                 </div>
