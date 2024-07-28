@@ -5,6 +5,7 @@ import * as l from "../../Constants/urls";
 import Header from "./Parts/Header";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import Loading from "../Common/Loading";
+import DonationsModal from "./Parts/DonationsModal";
 
 const More = () => {
   const { params } = useContext(RouterContext);
@@ -16,8 +17,15 @@ const More = () => {
 
   const [post, setPost] = useState(null);
   const [donationsList, setDonationsList] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
-  console.log(donationsList);
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     doGet("/" + params[1]);
@@ -105,7 +113,7 @@ const More = () => {
                 </div>
               </div>
               <div className=" bg-white shadow-sm rounded-lg">
-                {donationsList?.map((don) => (
+                {donationsList?.slice(0, 3).map((don) => (
                   <div
                     key={donationsList.id}
                     className="shadow-sm flex items-center p-2"
@@ -119,6 +127,52 @@ const More = () => {
                     </div>
                   </div>
                 ))}
+                <button
+                  type="button"
+                  onClick={handleShowModal}
+                  className="button-empty p-2 m-2"
+                >
+                  All donations
+                </button>
+                <DonationsModal
+                  show={showModal}
+                  onClose={handleCloseModal}
+                  title="All Donations"
+                  link={l.SITE_DONATE + "/" + post?.id}
+                >
+                  {donationsList?.map((don) => (
+                    <div
+                      key={don.id}
+                      className="shadow-sm flex items-center p-2"
+                    >
+                      <div className="bg-gray-100 rounded-full center-all w-10 h-10 text-light mr-2">
+                        <FaHandHoldingHeart />
+                      </div>
+                      <div>
+                        <h3 className="capitalize text-md">
+                          {don.sponsorName}
+                        </h3>
+                        <h4 className="font-bold">$ {don.donationAmount}</h4>
+                      </div>
+                    </div>
+                  ))}
+                  {donationsList?.map((don) => (
+                    <div
+                      key={don.id}
+                      className="shadow-sm flex items-center p-2"
+                    >
+                      <div className="bg-gray-100 rounded-full center-all w-10 h-10 text-light mr-2">
+                        <FaHandHoldingHeart />
+                      </div>
+                      <div>
+                        <h3 className="capitalize text-md">
+                          {don.sponsorName}
+                        </h3>
+                        <h4 className="font-bold">$ {don.donationAmount}</h4>
+                      </div>
+                    </div>
+                  ))}
+                </DonationsModal>
               </div>
             </div>
           </div>

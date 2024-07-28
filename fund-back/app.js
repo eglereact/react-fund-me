@@ -720,6 +720,7 @@ app.get("/more/post-donations-list/:id", (req, res) => {
       FROM donations d
       INNER JOIN posts p ON d.post_id = p.id
       WHERE d.post_id = ?
+      ORDER BY d.created_at DESC
       `;
 
   connection.query(sql, [id], (err, rows) => {
