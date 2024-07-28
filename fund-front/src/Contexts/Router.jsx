@@ -14,6 +14,7 @@ import CreatePostForm from "../Components/Forms/CreatePostForm";
 import Donate from "../Components/Web/Parts/Donate";
 import DonationsList from "../Components/Admin/DonationsList";
 import More from "../Components/Web/More";
+import { ThankYou } from "../Components/Web/ThankYou";
 
 const RouterContext = createContext([]);
 
@@ -45,6 +46,7 @@ const Router = () => {
 
     { path: l.SITE_REGISTER, pc: 0, component: <Register /> },
     { path: l.SITE_LOGIN, pc: 0, component: <Login /> },
+    { path: l.SITE_THANK_YOU, pc: 0, component: <ThankYou /> },
     {
       path: l.SITE_DASHBOARD,
       pc: 1,

@@ -54,7 +54,7 @@ const Donate = () => {
 
     setButtonDisabled(false);
     if (response.type === "success") {
-      window.location.hash = l.SITE_HOME;
+      window.location.hash = l.SITE_THANK_YOU;
     }
     // Uncomment and handle server errors if necessary
     else {

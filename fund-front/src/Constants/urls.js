@@ -10,6 +10,7 @@ export const CREATE_POST = "#create/fundraiser";
 export const SITE_GET_POSTS = "web/posts";
 export const SITE_DONATE = "#donate/post";
 export const SITE_MORE = "#more/post";
+export const SITE_THANK_YOU = "#thankyou";
 
 // Admin URLs
 export const SITE_DASHBOARD = "#admin/dashboard";
