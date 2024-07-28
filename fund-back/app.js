@@ -350,6 +350,32 @@ app.get("/web/posts", (req, res) => {
   });
 });
 
+app.get("/featured/posts", (req, res) => {
+  const sql = `
+    SELECT 
+      p.id,
+      p.title,
+      p.text,
+      p.image,
+      p.amount,
+      p.amountRaised,
+      p.featured,
+      p.approved,
+      p.category,
+      u.name AS authorUsername
+    FROM posts AS p
+    LEFT JOIN users AS u ON p.user_id = u.id
+    WHERE p.featured = 1 AND p.approved = 1`;
+
+  connection.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: "Database query error" });
+      return;
+    }
+    res.json({ featuredPosts: rows }).end();
+  });
+});
+
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
 

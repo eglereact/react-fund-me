@@ -79,7 +79,11 @@ const Post = ({ post }) => {
         <div className="w-2/3 flex flex-col gap-3">
           <h2 className="text-2xl font-bold mt-4 text-dark">{post.title}</h2>
           <p className="font-bold uppercase">{post.authorUsername}</p>
-          <p className="text-gray-900 mt-2 pb-4">{post.text}</p>
+          <p className="text-gray-900 mt-2 pb-4">
+            {post.text.length > 150
+              ? post.text.substring(0, 150) + "..."
+              : post.text}
+          </p>
           <div className="mt-4">
             <div className="bg-gray-200 rounded-full h-2 relative">
               <div

@@ -2,11 +2,10 @@ import Post from "./Post";
 import * as l from "../../../Constants/urls";
 import useServerGet from "../../../Hooks/useServerGet";
 import { useEffect, useState } from "react";
-import Header from "./Header";
 
-const Posts = () => {
+const FeaturedPosts = () => {
   const { doAction: doGet, response: serverGetResponse } = useServerGet(
-    l.SITE_GET_POSTS
+    l.SITE_GET_FEATURED
   );
   const [posts, setPosts] = useState(null);
 
@@ -20,19 +19,19 @@ const Posts = () => {
     if (null === serverGetResponse) {
       return;
     }
-    setPosts(serverGetResponse.data.posts ?? null);
+    console.log(serverGetResponse);
+    setPosts(serverGetResponse.data.featuredPosts ?? null);
   }, [serverGetResponse]);
 
   return (
     <>
-      <Header />
       <section className="bg-light-grey p-20">
         <div className="max-w-[1200px] center-all flex-col  m-auto">
-          <h1 className="text-5xl font-bold p-4 text-dark">Our fundraising</h1>
+          <h1 className="text-5xl font-bold p-4 text-dark">
+            Our featuring fundraising
+          </h1>
           <h3 className="text-xl text-center text-gray-900 w-2/3">
-            Your contribution matters, and we value your trust in our mission.
-            Rest assured that your donation will be utilized responsibly and
-            efficiently.
+            Discover fundraisers inspired by what you care about
           </h3>
           {posts === null && (
             <div>
@@ -48,4 +47,4 @@ const Posts = () => {
     </>
   );
 };
-export default Posts;
+export default FeaturedPosts;
