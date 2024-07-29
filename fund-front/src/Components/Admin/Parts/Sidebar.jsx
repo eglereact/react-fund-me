@@ -14,8 +14,8 @@ const Sidebar = ({ children }) => {
   return (
     <>
       <Gate status="role" role={["admin", "editor"]}>
-        <div className="flex flex-col h-screen">
-          <div className="bg-darkblue h-16 w-full flex items-center pl-10 justify-between">
+        <div className="flex flex-col ">
+          <div className="bg-darkblue h-16  flex items-center pl-10 justify-between">
             <Logo />
             <div className="center-all gap-4 mr-8">
               <p className="text-white">
@@ -28,9 +28,9 @@ const Sidebar = ({ children }) => {
               </a>
             </div>
           </div>
-          <div className="flex h-full">
+          <div className="flex ">
             <div
-              className={`bg-lightgray w-20 md:w-64 text-gray-400 h-full overflow-hidden p-5 transition-width duration-300 `}
+              className={`bg-lightgray w-20 md:w-64 text-gray-400 overflow-hidden p-5 transition-width duration-300 `}
             >
               <ul className="mt-10">
                 <li className="mb-4 h-10">
@@ -71,7 +71,9 @@ const Sidebar = ({ children }) => {
                 </li>
               </ul>
             </div>
-            <div className="flex-1 h-full p-10 bg-gray-100">{children}</div>
+            <div className="flex-1 min-h-screen p-10 bg-gray-100">
+              {children}
+            </div>
           </div>
         </div>
       </Gate>

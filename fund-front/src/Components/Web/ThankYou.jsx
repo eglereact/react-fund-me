@@ -1,7 +1,7 @@
 import { FaLongArrowAltLeft } from "react-icons/fa";
 export const ThankYou = () => {
   return (
-    <div className="center-all h-screen">
+    <div className="center-all h-screen bg-slate-y100">
       <div className="center-all flex-col ">
         <img src="/images/ty3.png" className="w-[400px]" />
         <h1 className="text-3xl mb-10 w-1/2 text-center">

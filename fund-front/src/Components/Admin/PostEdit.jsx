@@ -3,7 +3,6 @@ import { RouterContext } from "../../Contexts/Router";
 import useServerGet from "../../Hooks/useServerGet";
 import useServerPut from "../../Hooks/useServerPut";
 import * as l from "../../Constants/urls";
-import roles from "../../Constants/roles";
 import Input from "../Forms/Input";
 import Select from "../Forms/Select";
 import { LoaderContext } from "../../Contexts/Loader";
@@ -29,7 +28,6 @@ export default function PostEdit() {
     if (null === serverGetResponse) {
       return;
     }
-    console.log(serverGetResponse);
     setPost(serverGetResponse.data.user ?? null);
   }, [serverGetResponse]);
 
@@ -59,29 +57,34 @@ export default function PostEdit() {
         {null === post && <h3>Loading...</h3>}
         {null !== post && (
           <form>
-            <Select
-              onChange={handleForm}
-              value={post.approved}
-              name="approved"
-              options={[
-                { value: 0, label: "not approved" },
-                { value: 1, label: "approved" },
-              ]}
-            />
-            <Select
-              onChange={handleForm}
-              value={post.featured}
-              name="featured"
-              options={[
-                { value: 0, label: "not featured" },
-                { value: 1, label: "featured" },
-              ]}
-            />
+            <div className="flex flex-col gap-1 mb-5">
+              <Select
+                onChange={handleForm}
+                value={post.approved}
+                name="approved"
+                options={[
+                  { value: 0, label: "not approved" },
+                  { value: 1, label: "approved" },
+                ]}
+                label="Select Approved"
+              />
+              <Select
+                onChange={handleForm}
+                value={post.featured}
+                name="featured"
+                options={[
+                  { value: 0, label: "not featured" },
+                  { value: 1, label: "featured" },
+                ]}
+                label="Select Featured"
+              />
+            </div>
             <Input
               onChange={handleForm}
               value={post.title}
               type="text"
               name="title"
+              label="Title"
             />
             <Input
               onChange={handleForm}
@@ -89,6 +92,7 @@ export default function PostEdit() {
               type="text"
               name="text"
               autoComplete="off"
+              label="Text"
             />
             <Input
               onChange={handleForm}
@@ -96,12 +100,14 @@ export default function PostEdit() {
               type="number"
               name="amount"
               autoComplete="off"
+              label="Amount"
             />
             <Select
               onChange={handleForm}
               value={post.category}
               name="category"
               options={categories}
+              label="Select Category"
             />
             <ul className="flex items-center gap-4 mt-6">
               <li>
