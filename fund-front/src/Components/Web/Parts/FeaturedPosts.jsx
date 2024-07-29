@@ -9,8 +9,6 @@ const FeaturedPosts = () => {
   );
   const [posts, setPosts] = useState(null);
 
-  console.log(posts);
-
   useEffect(() => {
     doGet();
   }, [doGet]);
@@ -19,7 +17,6 @@ const FeaturedPosts = () => {
     if (null === serverGetResponse) {
       return;
     }
-    console.log(serverGetResponse);
     setPosts(serverGetResponse.data.featuredPosts ?? null);
   }, [serverGetResponse]);
 

@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { StatsContext } from "../../../Contexts/Stats";
+
 const Stats = () => {
+  const { stats } = useContext(StatsContext);
+
   return (
     <section className="p-40">
       <div className="max-w-[1200px] m-auto center-all">
@@ -18,15 +23,21 @@ const Stats = () => {
             data-aos-duration="600"
           >
             <div>
-              <h1 className="text-5xl text-dark font-bold">270+</h1>
+              <h1 className="text-5xl text-dark font-bold">
+                {stats?.countPosts}
+              </h1>
               <h3 className="text-gray-900">People we helped</h3>
             </div>
             <div>
-              <h1 className="text-5xl text-dark font-bold">500k+</h1>
+              <h1 className="text-5xl text-dark font-bold">
+                {Math.round(stats?.totalMoneyCollected)}
+              </h1>
               <h3 className="text-gray-900">Dollars we collected</h3>
             </div>
             <div>
-              <h1 className="text-5xl text-dark font-bold">20+</h1>
+              <h1 className="text-5xl text-dark font-bold">
+                {stats?.countPostsGoalReached}
+              </h1>
               <h3 className="text-gray-900">Closed projects</h3>
             </div>
           </div>

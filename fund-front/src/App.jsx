@@ -9,6 +9,7 @@ import DeleteModal from "./Components/Common/DeleteModal";
 import { Loader } from "./Contexts/Loader";
 import LoaderContainer from "./Components/Common/Loader";
 import { Auth } from "./Contexts/Auth";
+import { Stats } from "./Contexts/Stats";
 
 function App() {
   AOS.init();
@@ -18,10 +19,12 @@ function App() {
       <Loader>
         <Auth>
           <Modals>
-            <Msg />
-            <DeleteModal />
-            <LoaderContainer />
-            <Router />
+            <Stats>
+              <Msg />
+              <DeleteModal />
+              <LoaderContainer />
+              <Router />
+            </Stats>
           </Modals>
         </Auth>
       </Loader>

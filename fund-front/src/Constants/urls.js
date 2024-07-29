@@ -35,6 +35,7 @@ export const SERVER_MORE = "more/post";
 export const SERVER_MORE_DONATIONS_LIST = "more/post-donations-list";
 export const SITE_GET_POSTS = "web/posts";
 export const SITE_GET_FEATURED = "featured/posts";
+export const SITE_GET_STATS = "stats";
 
 export const SERVER_GET_POSTS = "admin/posts";
 export const SERVER_DELETE_POST = "admin/delete/post";

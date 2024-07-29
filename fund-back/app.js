@@ -892,6 +892,48 @@ app.post("/logout", (req, res) => {
   }, 1500);
 });
 
+app.get("/stats", (req, res) => {
+  const sqlUsers = "SELECT COUNT(*) AS countUsers FROM users";
+  const sqlPosts = "SELECT COUNT(*) AS countPosts FROM posts";
+  const sqlDonations =
+    "SELECT COUNT(*) AS countDonations, SUM(donationAmount) AS totalMoneyCollected FROM donations";
+  const sqlPostsGoalReached =
+    "SELECT COUNT(*) AS countPostsGoalReached FROM posts WHERE amountRaised >= amount";
+
+  let stats = {};
+
+  connection.query(sqlUsers, (err, results) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    stats.countUsers = results[0].countUsers;
+
+    connection.query(sqlPosts, (err, results) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      stats.countPosts = results[0].countPosts;
+
+      connection.query(sqlDonations, (err, results) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        stats.countDonations = results[0].countDonations;
+        stats.totalMoneyCollected = results[0].totalMoneyCollected;
+
+        connection.query(sqlPostsGoalReached, (err, results) => {
+          if (err) {
+            return res.status(500).send(err);
+          }
+          stats.countPostsGoalReached = results[0].countPostsGoalReached;
+
+          res.json(stats);
+        });
+      });
+    });
+  });
+});
+
 app.listen(port, (_) => {
   console.log(`reactFUNDme app listening on port ${port}`);
 });

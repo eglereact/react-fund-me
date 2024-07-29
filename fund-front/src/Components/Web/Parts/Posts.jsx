@@ -10,8 +10,6 @@ const Posts = () => {
   );
   const [posts, setPosts] = useState(null);
 
-  console.log(posts);
-
   useEffect(() => {
     doGet();
   }, [doGet]);
