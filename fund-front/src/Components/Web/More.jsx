@@ -156,22 +156,6 @@ const More = () => {
                       </div>
                     </div>
                   ))}
-                  {donationsList?.map((don) => (
-                    <div
-                      key={don.id}
-                      className="shadow-sm flex items-center p-2"
-                    >
-                      <div className="bg-gray-100 rounded-full center-all w-10 h-10 text-light mr-2">
-                        <FaHandHoldingHeart />
-                      </div>
-                      <div>
-                        <h3 className="capitalize text-md">
-                          {don.sponsorName}
-                        </h3>
-                        <h4 className="font-bold">$ {don.donationAmount}</h4>
-                      </div>
-                    </div>
-                  ))}
                 </DonationsModal>
               </div>
             </div>

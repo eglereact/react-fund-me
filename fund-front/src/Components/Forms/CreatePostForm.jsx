@@ -8,6 +8,11 @@ const categories = [
   { id: 2, category: "medical" },
   { id: 3, category: "sports" },
   { id: 4, category: "family" },
+  { id: 5, category: "environment" },
+  { id: 6, category: "community" },
+  { id: 7, category: "emergency" },
+  { id: 8, category: "education" },
+  { id: 9, category: "other" },
 ];
 
 const defaultValues = {
