@@ -94,7 +94,7 @@ const CreatePostForm = () => {
 
   return (
     <div className="bg-light-grey w-full h-[100vh]">
-      <div className="max-w-[1920px] flex">
+      <div className="max-w-[1920px] flex m-auto">
         <div className="h-[100vh] w-1/3 text-dark flex justify-center ml-32 flex-col gap-10">
           <h1 className="font-bold text-5xl max-w-[500px]">
             Let's begin your fundraising journey
@@ -102,7 +102,7 @@ const CreatePostForm = () => {
           <p className="text-lg">Please fill the form with all the details!</p>
         </div>
         <div className="bg-white h-[100vh] w-2/3 rounded-l-[50px] flex flex-col justify-between">
-          <form onSubmit={handleSubmit} className="p-14 flex flex-col gap-10">
+          <form onSubmit={handleSubmit} className="p-11 flex flex-col gap-10">
             <input
               type="text"
               placeholder="Title"

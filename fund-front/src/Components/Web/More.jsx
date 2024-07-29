@@ -47,7 +47,6 @@ const More = () => {
     if (null === serverGetResponseDonations) {
       return;
     }
-    console.log("don", serverGetResponseDonations);
     setDonationsList(serverGetResponseDonations.data.donations ?? null);
   }, [serverGetResponseDonations]);
 
@@ -139,6 +138,7 @@ const More = () => {
                   onClose={handleCloseModal}
                   title="All Donations"
                   link={l.SITE_DONATE + "/" + post?.id}
+                  total={post.amountRaised - post?.amount}
                 >
                   {donationsList?.map((don) => (
                     <div

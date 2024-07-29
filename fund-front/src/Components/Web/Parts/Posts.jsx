@@ -3,6 +3,7 @@ import * as l from "../../../Constants/urls";
 import useServerGet from "../../../Hooks/useServerGet";
 import { useEffect, useState } from "react";
 import Header from "./Header";
+import Footer from "../Footer";
 
 const Posts = () => {
   const { doAction: doGet, response: serverGetResponse } = useServerGet(
@@ -43,6 +44,7 @@ const Posts = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

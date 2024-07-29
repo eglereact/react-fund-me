@@ -77,6 +77,7 @@ export default function UserEdit() {
               value={user.role}
               name="role"
               options={roles}
+              label="Select Role"
             />
 
             {/* <Input
