@@ -110,8 +110,11 @@ const Login = () => {
           </div>
         </div>
       </Gate>
-      <Gate status="logged">
+      <Gate status="role" role={["admin", "editor"]}>
         <Redirect to="SITE_HOME" />
+      </Gate>
+      <Gate status="role" role={["user"]}>
+        <Redirect to="CREATE_POST" />
       </Gate>
     </>
   );

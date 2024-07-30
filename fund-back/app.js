@@ -272,15 +272,17 @@ app.get("/admin/donations", (req, res) => {
   }
 
   const sql = `
-        SELECT 
-          d.id,
-          d.sponsorName,
-          d.post_id,
-          d.donationAmount,
-          p.title AS postTitle,
-          d.created_at
-        FROM donations AS d
-        JOIN posts AS p ON d.post_id = p.id`;
+  SELECT 
+    d.id,
+    d.sponsorName,
+    d.post_id,
+    d.donationAmount,
+    p.title AS postTitle,
+    d.created_at
+  FROM donations AS d
+  JOIN posts AS p ON d.post_id = p.id
+  ORDER BY d.created_at DESC
+`;
 
   connection.query(sql, (err, rows) => {
     if (err) throw err;
@@ -311,7 +313,8 @@ app.get("/admin/posts", (req, res) => {
       u.name AS authorUsername
     FROM posts AS p
     LEFT JOIN users AS u
-      ON p.user_id = u.id`;
+      ON p.user_id = u.id
+      ORDER BY p.id DESC`;
 
   connection.query(sql, (err, rows) => {
     if (err) throw err;

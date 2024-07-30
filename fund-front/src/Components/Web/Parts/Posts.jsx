@@ -4,6 +4,7 @@ import useServerGet from "../../../Hooks/useServerGet";
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "../Footer";
+import Gate from "../../Common/Gate";
 
 const Posts = () => {
   const { doAction: doGet, response: serverGetResponse } = useServerGet(
@@ -28,11 +29,31 @@ const Posts = () => {
       <section className="bg-light-grey p-20">
         <div className="max-w-[1200px] center-all flex-col  m-auto">
           <h1 className="text-5xl font-bold p-4 text-dark">Our fundraising</h1>
-          <h3 className="text-xl text-center text-gray-900 w-2/3">
+          <h3 className="text-xl text-center text-gray-900 w-2/3 mb-4">
             Your contribution matters, and we value your trust in our mission.
             Rest assured that your donation will be utilized responsibly and
             efficiently.
           </h3>
+          <Gate status="logged">
+            <a
+              href={l.CREATE_POST}
+              className="button-light inline-block capitalize"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              Start your fund me
+            </a>
+          </Gate>
+          <Gate status="not-logged">
+            <a
+              href={l.SITE_LOGIN}
+              className="button-light inline-block capitalize"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              Start your fund me
+            </a>
+          </Gate>
           {posts === null && (
             <div>
               <h1>Loading...</h1>
