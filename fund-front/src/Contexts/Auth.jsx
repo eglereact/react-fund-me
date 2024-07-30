@@ -15,7 +15,7 @@ export const Auth = ({ children }) => {
 
   const removeUser = useCallback((_) => {
     setUser(null);
-    localStorage.removeItem("bookUser");
+    localStorage.removeItem("fundUser");
   }, []);
 
   return (

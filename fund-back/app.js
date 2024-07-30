@@ -881,7 +881,7 @@ app.post("/logout", (req, res) => {
           .end();
         return;
       }
-      res.clearCookie("book-session");
+      res.clearCookie("fund-session");
       res
         .json({
           message: {
