@@ -34,9 +34,6 @@ const Donate = () => {
   const { user } = useContext(AuthContext);
   const { errors, validate, setServerErrors } = useDonate();
 
-  console.log(errors);
-  console.log(form);
-
   useEffect(() => {
     doGet("/" + params[1]);
   }, [doGet, params]);
@@ -45,7 +42,6 @@ const Donate = () => {
     if (null === serverGetResponse) {
       return;
     }
-    console.log(serverGetResponse);
     setPost(serverGetResponse.data.post ?? null);
   }, [serverGetResponse]);
 

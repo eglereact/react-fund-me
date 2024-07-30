@@ -1,13 +1,17 @@
 import { useContext } from "react";
 import { StatsContext } from "../../../Contexts/Stats";
 
-const Stats = () => {
+const StatsBlock = () => {
   const { stats } = useContext(StatsContext);
+
+  const countPosts = stats?.countPosts ?? 0;
+  const totalMoneyCollected = stats?.totalMoneyCollected ?? 0;
+  const countPostsGoalReached = stats?.countPostsGoalReached ?? 0;
 
   return (
     <section className="p-40">
       <div className="max-w-[1200px] m-auto center-all">
-        <div className="w-1/2 space-y-6 ">
+        <div className="w-1/2 space-y-6">
           <p className="text-light uppercase text-xs">Why you choose us</p>
           <h1 className="text-dark text-3xl font-bold w-[360px]">
             Building a Sustainable Tomorrow
@@ -23,20 +27,18 @@ const Stats = () => {
             data-aos-duration="600"
           >
             <div>
-              <h1 className="text-5xl text-dark font-bold">
-                {stats?.countPosts}
-              </h1>
+              <h1 className="text-5xl text-dark font-bold">{countPosts}</h1>
               <h3 className="text-gray-900">People we helped</h3>
             </div>
             <div>
               <h1 className="text-5xl text-dark font-bold">
-                {Math.round(stats?.totalMoneyCollected)}
+                {Math.round(totalMoneyCollected)}
               </h1>
               <h3 className="text-gray-900">Dollars we collected</h3>
             </div>
             <div>
               <h1 className="text-5xl text-dark font-bold">
-                {stats?.countPostsGoalReached}
+                {countPostsGoalReached}
               </h1>
               <h3 className="text-gray-900">Closed projects</h3>
             </div>
@@ -49,4 +51,4 @@ const Stats = () => {
     </section>
   );
 };
-export default Stats;
+export default StatsBlock;

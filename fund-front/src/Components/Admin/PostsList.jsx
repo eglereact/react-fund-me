@@ -57,8 +57,6 @@ const PostsList = () => {
     }
   }, [serverDeleteResponse, showPost, removeHidden]);
 
-  console.log(posts);
-
   return (
     <div className="flex flex-col">
       <h1 className="text-4xl mb-10">Posts</h1>

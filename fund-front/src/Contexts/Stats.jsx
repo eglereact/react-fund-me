@@ -23,7 +23,6 @@ export const Stats = ({ children }) => {
     setStats(serverGetResponse.data ?? null);
   }, [serverGetResponse]);
 
-  console.log(stats?.countUsers);
   return (
     <StatsContext.Provider
       value={{

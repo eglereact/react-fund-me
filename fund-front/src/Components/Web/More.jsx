@@ -113,10 +113,7 @@ const More = () => {
               </div>
               <div className=" bg-white shadow-sm rounded-lg">
                 {donationsList?.slice(0, 3).map((don) => (
-                  <div
-                    key={donationsList.id}
-                    className="shadow-sm flex items-center p-2"
-                  >
+                  <div key={don.id} className="shadow-sm flex items-center p-2">
                     <div className="bg-gray-100 rounded-full center-all w-10 h-10 text-light mr-2">
                       <FaHandHoldingHeart />
                     </div>
