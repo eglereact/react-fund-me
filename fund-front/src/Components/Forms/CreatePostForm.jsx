@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import useServerPost from "../../Hooks/useServerPost";
 import * as l from "../../Constants/urls";
 import { AuthContext } from "../../Contexts/Auth";
+import useCreatePost from "../../Validations/useCreatePost";
 
 const categories = [
   { id: 1, category: "animals" },
@@ -31,6 +32,7 @@ const CreatePostForm = () => {
   const { doAction, response } = useServerPost("create-post");
 
   const { user } = useContext(AuthContext);
+  const { errors, validateForm, setServerErrors } = useCreatePost();
 
   const fileInputRef = useRef(null);
 
@@ -57,11 +59,11 @@ const CreatePostForm = () => {
       window.location.hash = l.SITE_HOME;
     }
     // Uncomment and handle server errors if necessary
-    // else {
-    //   if (response.data?.response?.data?.errors) {
-    //     setServerErrors(response.data.response.data.errors);
-    //   }
-    // }
+    else {
+      if (response.data?.response?.data?.errors) {
+        setServerErrors(response.data.response.data.errors);
+      }
+    }
   }, [response]);
 
   const handleChange = (e) => {
@@ -75,7 +77,7 @@ const CreatePostForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add validation logic here if necessary
-    // if (!validate(form)) return;
+    if (!validateForm(form, image)) return;
 
     setButtonDisabled(true);
     doAction({
@@ -102,52 +104,86 @@ const CreatePostForm = () => {
           <p className="text-lg">Please fill the form with all the details!</p>
         </div>
         <div className="bg-white h-[100vh] w-2/3 rounded-l-[50px] flex flex-col justify-between">
-          <form onSubmit={handleSubmit} className="p-11 flex flex-col gap-10">
-            <input
-              type="text"
-              placeholder="Title"
-              className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg"
-              value={form.title}
-              onChange={handleChange}
-              id="title"
-            />
-            <textarea
-              placeholder="Your story"
-              className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg"
-              value={form.text}
-              onChange={handleChange}
-              id="text"
-            ></textarea>
-
-            <input
-              type="text"
-              placeholder="Amount"
-              className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg"
-              value={form.amount}
-              onChange={handleChange}
-              id="amount"
-            />
-
-            <div className="flex flex-wrap gap-4">
-              {categories.map((cat) => (
-                <div key={cat.id} className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    id={`category-${cat.id}`}
-                    name="category"
-                    value={cat.category}
-                    checked={form.category === cat.category}
-                    onChange={handleCategoryChange}
-                    className="peer hidden"
-                  />
-                  <label
-                    htmlFor={`category-${cat.id}`}
-                    className="select-none cursor-pointer rounded-full border-2 border-gray-300 py-2 px-4 font-bold text-gray-300 transition-colors duration-200 ease-in-out peer-checked:bg-green-50 peer-checked:text-light peer-checked:border-[#6DAC4F]"
-                  >
-                    {cat.category}
-                  </label>
-                </div>
-              ))}
+          <form onSubmit={handleSubmit} className="p-11 flex flex-col gap-8">
+            <div className="flex flex-col">
+              <input
+                type="text"
+                placeholder="Title"
+                className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg"
+                value={form.title}
+                onChange={handleChange}
+                id="title"
+              />
+              <span
+                className={
+                  errors.title ? "inline-block text-red-400  ml-1" : ""
+                }
+              >
+                {errors.title ?? ""}
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <textarea
+                placeholder="Your story"
+                className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg"
+                value={form.text}
+                onChange={handleChange}
+                id="text"
+              ></textarea>
+              <span
+                className={errors.text ? "inline-block text-red-400  ml-1" : ""}
+              >
+                {errors.text ?? ""}
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <input
+                type="text"
+                placeholder="Amount"
+                className="border-2 border-gray-300 outline-none py-2 px-4 rounded-lg"
+                value={form.amount}
+                onChange={handleChange}
+                id="amount"
+              />
+              <span
+                className={
+                  errors.amount ? "inline-block text-red-400 ml-1" : ""
+                }
+              >
+                {errors.amount ?? ""}
+              </span>
+            </div>
+            <div>
+              <div className="flex flex-wrap gap-4">
+                {categories.map((cat) => (
+                  <div key={cat.id} className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      id={`category-${cat.id}`}
+                      name="category"
+                      value={cat.category}
+                      checked={form.category === cat.category}
+                      onChange={handleCategoryChange}
+                      className="peer hidden"
+                    />
+                    <label
+                      htmlFor={`category-${cat.id}`}
+                      className="select-none cursor-pointer rounded-full border-2 border-gray-300 py-2 px-4 font-bold text-gray-300 transition-colors duration-200 ease-in-out peer-checked:bg-green-50 peer-checked:text-light peer-checked:border-[#6DAC4F]"
+                    >
+                      {cat.category}
+                    </label>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <span
+                  className={
+                    errors.category ? "inline-block text-red-400 ml-1" : ""
+                  }
+                >
+                  {errors.category ?? ""}
+                </span>
+              </div>
             </div>
             <div>
               <input
@@ -156,8 +192,12 @@ const CreatePostForm = () => {
                 onChange={readImage}
                 id="image"
                 ref={fileInputRef}
-              />
-
+              />{" "}
+              <span
+                className={errors.image ? "inline-block text-red-400 ml-1" : ""}
+              >
+                {errors.image ?? ""}
+              </span>
               {image && (
                 <div className="mt-4 flex">
                   <img src={image} alt={form.name} className="w-64" />
