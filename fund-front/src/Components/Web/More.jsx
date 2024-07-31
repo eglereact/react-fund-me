@@ -6,6 +6,7 @@ import Header from "./Parts/Header";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import Loading from "../Common/Loading";
 import DonationsModal from "./Parts/DonationsModal";
+import { FaLongArrowAltUp } from "react-icons/fa";
 
 const More = () => {
   const { params } = useContext(RouterContext);
@@ -133,13 +134,31 @@ const More = () => {
                     </div>
                   </div>
                 ))}
-                <button
-                  type="button"
-                  onClick={handleShowModal}
-                  className="button-empty p-2 m-2"
-                >
-                  All donations
-                </button>
+                {donationsList.length > 0 ? (
+                  <button
+                    type="button"
+                    onClick={handleShowModal}
+                    className="button-empty p-2 m-2"
+                  >
+                    All donations
+                  </button>
+                ) : (
+                  <p className="flex items-center p-2 text-xl">
+                    Be first to{" "}
+                    <a
+                      className="ml-1 hover:underline hover:text-light"
+                      href={l.SITE_DONATE + "/" + post?.id}
+                    >
+                      {" "}
+                      donate
+                    </a>
+                    .
+                    <span className="animated-arrow text-dark">
+                      {" "}
+                      <FaLongArrowAltUp />
+                    </span>
+                  </p>
+                )}
                 <DonationsModal
                   show={showModal}
                   onClose={handleCloseModal}

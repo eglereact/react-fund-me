@@ -84,3 +84,18 @@ body {
     @apply border-2 border-[#6DAC4FFF] p-3 rounded-lg focus:bg-[#EFEFE8FF] font-bold focus:text-[#6DAC4FFF];
   }
 }
+
+@keyframes moveUpDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animated-arrow {
+  display: inline-block;
+  animation: moveUpDown 1s infinite;
+}

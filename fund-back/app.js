@@ -202,7 +202,11 @@ app.post("/create-donation", (req, res) => {
           success: true,
           id: result.insertId,
           uuid: req.body.id,
-          message: { type: "success", text: "Nice! Donation added!" },
+          message: {
+            type: "success",
+            title: "Thank You",
+            text: "Nice! Donation added!",
+          },
         });
       }
     }
@@ -239,10 +243,7 @@ app.put("/update/post-donation/:id", (req, res) => {
         },
       });
     } else {
-      res.json({
-        success: true,
-        message: { type: "success", text: "Amount updated successfully!" },
-      });
+      res.status(200).end();
     }
   });
 });
@@ -750,23 +751,14 @@ app.get("/more/post-donations-list/:id", (req, res) => {
       INNER JOIN posts p ON d.post_id = p.id
       WHERE d.post_id = ?
       ORDER BY d.created_at DESC
-      `;
+  `;
 
   connection.query(sql, [id], (err, rows) => {
-    if (err) throw err;
-    if (!rows.length) {
-      res
-        .status(404)
-        .json({
-          message: {
-            type: "info",
-            title: "Post",
-            text: `No donations found for the post with ID ${id}.`,
-          },
-        })
-        .end();
+    if (err) {
+      res.status(500).json({ error: "Database query failed" }).end();
       return;
     }
+
     res
       .json({
         donations: rows,

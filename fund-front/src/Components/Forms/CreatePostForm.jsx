@@ -3,6 +3,7 @@ import useServerPost from "../../Hooks/useServerPost";
 import * as l from "../../Constants/urls";
 import { AuthContext } from "../../Contexts/Auth";
 import useCreatePost from "../../Validations/useCreatePost";
+import { LoaderContext } from "../../Contexts/Loader";
 
 const categories = [
   { id: 1, category: "animals" },
@@ -33,6 +34,7 @@ const CreatePostForm = () => {
 
   const { user } = useContext(AuthContext);
   const { errors, validateForm, setServerErrors } = useCreatePost();
+  const { setShow } = useContext(LoaderContext);
 
   const fileInputRef = useRef(null);
 
@@ -78,7 +80,7 @@ const CreatePostForm = () => {
     e.preventDefault();
     // Add validation logic here if necessary
     if (!validateForm(form, image)) return;
-
+    setShow(true);
     setButtonDisabled(true);
     doAction({
       ...form,
@@ -104,7 +106,7 @@ const CreatePostForm = () => {
           <p className="text-lg">Please fill the form with all the details!</p>
         </div>
         <div className="bg-white h-[100vh] w-2/3 rounded-l-[50px] flex flex-col justify-between">
-          <form onSubmit={handleSubmit} className="p-11 flex flex-col gap-8">
+          <form onSubmit={handleSubmit} className="p-11 flex flex-col">
             <div className="flex flex-col">
               <input
                 type="text"
@@ -116,7 +118,7 @@ const CreatePostForm = () => {
               />
               <span
                 className={
-                  errors.title ? "inline-block text-red-400  ml-1" : ""
+                  errors.title ? "inline-block text-red-400 h-10" : "h-10"
                 }
               >
                 {errors.title ?? ""}
@@ -131,7 +133,9 @@ const CreatePostForm = () => {
                 id="text"
               ></textarea>
               <span
-                className={errors.text ? "inline-block text-red-400  ml-1" : ""}
+                className={
+                  errors.text ? "inline-block text-red-400 h-10" : "h-10"
+                }
               >
                 {errors.text ?? ""}
               </span>
@@ -147,7 +151,7 @@ const CreatePostForm = () => {
               />
               <span
                 className={
-                  errors.amount ? "inline-block text-red-400 ml-1" : ""
+                  errors.amount ? "inline-block text-red-400 h-10" : "h-10"
                 }
               >
                 {errors.amount ?? ""}
@@ -175,14 +179,12 @@ const CreatePostForm = () => {
                   </div>
                 ))}
               </div>
-              <div>
-                <span
-                  className={
-                    errors.category ? "inline-block text-red-400 ml-1" : ""
-                  }
-                >
-                  {errors.category ?? ""}
-                </span>
+              <div
+                className={
+                  errors.category ? "inline-block text-red-400 h-10" : "h-10"
+                }
+              >
+                <span>{errors.category ?? ""}</span>
               </div>
             </div>
             <div>
@@ -193,11 +195,13 @@ const CreatePostForm = () => {
                 id="image"
                 ref={fileInputRef}
               />{" "}
-              <span
-                className={errors.image ? "inline-block text-red-400 ml-1" : ""}
+              <div
+                className={
+                  errors.image ? "inline-block text-red-400 h-10" : "h-10"
+                }
               >
-                {errors.image ?? ""}
-              </span>
+                <span>{errors.image ?? ""}</span>
+              </div>
               {image && (
                 <div className="mt-4 flex">
                   <img src={image} alt={form.name} className="w-64" />
