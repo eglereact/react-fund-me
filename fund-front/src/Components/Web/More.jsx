@@ -50,6 +50,10 @@ const More = () => {
     setDonationsList(serverGetResponseDonations.data.donations ?? null);
   }, [serverGetResponseDonations]);
 
+  const progress = Math.round(
+    Math.min((post?.amountRaised / post?.amount) * 100, 100)
+  );
+
   return (
     <>
       <section className="bg-light-grey min-h-screen">
@@ -93,6 +97,12 @@ const More = () => {
                 <p className="text-gray-500 text-sm">
                   {donationsList?.length} donations
                 </p>
+                <div className="bg-gray-200 rounded-full h-2 mt-2 relative">
+                  <div
+                    className="bg-light h-2 rounded-full"
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
               </div>
               <div className="bg-white shadow-sm rounded-lg center-all relative p-2">
                 <img src="images/donate.png" alt="Donate" className="w-60" />

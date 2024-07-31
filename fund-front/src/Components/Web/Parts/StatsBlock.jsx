@@ -25,6 +25,7 @@ const StatsBlock = () => {
             data-aos="fade-up"
             data-aos-delay="100"
             data-aos-duration="600"
+            data-aos-once={true}
           >
             <div>
               <h1 className="text-5xl text-dark font-bold">{countPosts}</h1>
