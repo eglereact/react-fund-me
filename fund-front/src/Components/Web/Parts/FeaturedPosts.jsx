@@ -24,7 +24,7 @@ const FeaturedPosts = () => {
     <>
       <section className="bg-light-grey p-20">
         <div className="max-w-[1200px] center-all flex-col  m-auto">
-          <h1 className="text-5xl font-bold p-4 text-dark">
+          <h1 className="text-5xl font-bold p-4 text-dark capitalize">
             Our featuring fundraising
           </h1>
           <h3 className="text-xl text-center text-gray-900 w-2/3">

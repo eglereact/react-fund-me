@@ -18,7 +18,7 @@ const DonationsModal = ({ show, onClose, children, title, link, total }) => {
           </button>
         </div>
         <div className="mt-4 overflow-y-auto h-96">{children}</div>
-        {total <= 0 && (
+        {total <= -1 && (
           <div className="pt-4 text-center border-t-2 mt-2 border-gray-100">
             <p>
               <span className="text-lg mr-2">Want to be on the list?</span>

@@ -13,7 +13,7 @@ const Banner = () => {
             Leading crowdfunding platform
           </p>
           <h1
-            className="text-dark text-5xl font-bold"
+            className="text-dark text-5xl font-bold capitalize"
             data-aos-delay="100"
             data-aos="fade-up"
           >
