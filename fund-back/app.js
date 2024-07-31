@@ -343,7 +343,9 @@ app.get("/web/posts", (req, res) => {
     FROM posts AS p
     LEFT JOIN users AS u ON p.user_id = u.id
     WHERE p.approved = 1
-     ORDER BY (p.amount - p.amountRaised) DESC`;
+     ORDER BY 
+     (p.amount <= p.amountRaised),
+      p.id DESC `;
 
   connection.query(sql, (err, rows) => {
     if (err) {
