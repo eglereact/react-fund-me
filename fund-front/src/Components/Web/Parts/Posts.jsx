@@ -26,8 +26,8 @@ const Posts = () => {
   return (
     <>
       <Header />
-      <section className="bg-light-grey p-20">
-        <div className="max-w-[1200px] center-all flex-col  m-auto">
+      <section className="bg-light-grey p-4 md:p-20">
+        <div className="w-full md:max-w-[1200px] center-all flex-col  m-auto">
           <h1 className="text-5xl font-bold p-4 text-dark">Our Fundraising</h1>
           <h3 className="text-xl text-center text-gray-900 w-2/3 mb-4">
             Your contribution matters, and we value your trust in our mission.
@@ -50,6 +50,7 @@ const Posts = () => {
               className="button-light inline-block capitalize"
               data-aos="fade-up"
               data-aos-delay="500"
+              data-aos-once={true}
             >
               Start your fund me
             </a>
@@ -59,7 +60,7 @@ const Posts = () => {
               <h1>Loading...</h1>
             </div>
           )}
-          <div className="w-full p-28">
+          <div className="w-full p-4 md:p-10 lg:p-28">
             {posts !== null &&
               posts.map((post) => <Post key={post.id} post={post} />)}
           </div>

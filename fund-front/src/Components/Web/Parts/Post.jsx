@@ -20,7 +20,7 @@ const Post = ({ post }) => {
         <img
           src="./images/ty2.png"
           alt="Thank You"
-          className="absolute w-32 left-64 bottom-1  z-10 fill-slate-900  -rotate-6"
+          className="absolute w-32 left-52 md:left-64 bottom-1  z-10 fill-slate-900  -rotate-6"
         />
 
         <div className="w-2/3 flex flex-col gap-3">
@@ -29,7 +29,7 @@ const Post = ({ post }) => {
             Organised by:{" "}
             <span className="font-bold uppercase">{post.authorUsername}</span>
           </p>
-          <p className="text-gray-900 mt-2 pb-4 h-16">
+          <p className="text-gray-900 mt-2 pb-4 h-16 hidden md:flex">
             {" "}
             {post.text.length > 150
               ? post.text.substring(0, 150) + "..."
@@ -84,7 +84,7 @@ const Post = ({ post }) => {
         data-aos-duration="600"
         data-aos-delay="300"
         className="p-6 bg-white shadow-md rounded-md mb-4 border-2 w-full
-       border-white flex gap-10"
+       border-white flex md:flex-row flex-col-reverse md:gap-10"
       >
         <div className="w-2/3 flex flex-col gap-3">
           <h2 className="text-2xl font-bold mt-4 text-dark">{post.title}</h2>
@@ -92,7 +92,7 @@ const Post = ({ post }) => {
             Organised by:{" "}
             <span className="font-bold uppercase">{post.authorUsername}</span>
           </p>
-          <p className="text-gray-900 mt-2 pb-4">
+          <p className="text-gray-900 mt-2 pb-4 hidden md:flex">
             {post.text.length > 150
               ? post.text.substring(0, 150) + "..."
               : post.text}

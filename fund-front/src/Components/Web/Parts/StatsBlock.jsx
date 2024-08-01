@@ -9,9 +9,9 @@ const StatsBlock = () => {
   const countPostsGoalReached = stats?.countPostsGoalReached ?? 0;
 
   return (
-    <section className="p-40">
-      <div className="max-w-[1200px] m-auto center-all">
-        <div className="w-1/2 space-y-6">
+    <section className="p-4 md:p-40">
+      <div className="md:max-w-[1200px] m-auto center-all">
+        <div className="w-full md:w-1/2 space-y-6">
           <p className="text-light uppercase text-xs">Why you choose us</p>
           <h1 className="text-dark text-3xl font-bold w-[360px]">
             Building a Sustainable Tomorrow
@@ -45,7 +45,7 @@ const StatsBlock = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="md:w-1/2 lg:block hidden">
           <img src="./images/plant2.png" alt="plant" />
         </div>
       </div>
